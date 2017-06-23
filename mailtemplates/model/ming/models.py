@@ -5,9 +5,9 @@ from mailtemplates.model import DBSession
 from ming import schema as s
 
 
-class Template(MappedClass):
+class MailModel(MappedClass):
     class __mongometa__:
-        name = 'mailtemplates_templates'
+        name = 'mailtemplates_mail_models'
         session = DBSession
         indexes = [('name',)]
 
@@ -23,7 +23,7 @@ class TemplateTranslation(MappedClass):
         indexes = [()]
 
     _id = FieldProperty(s.ObjectId)
-    templates = RelationProperty('Template')
+    mail_models = RelationProperty('MailModel')
     language = FieldProperty(s.String)
     subject = FieldProperty(s.String)
     body = FieldProperty(s.String)

@@ -8,7 +8,7 @@ log = logging.getLogger('tgapp-mailtemplates')
 DBSession = PluggableSession()
 provider = None
 
-Template = None
+MailModel = None
 TemplateTranslation = None
 
 
@@ -17,16 +17,16 @@ def init_model(app_session):
 
 
 def configure_models():
-    global provider, Template, TemplateTranslation
+    global provider, MailModel, TemplateTranslation
 
     if tg.config.get('use_sqlalchemy', False):
         log.info('Configuring MailTemplates for SQLAlchemy')
-        from mailtemplates.model.sqla.models import Template, TemplateTranslation
+        from mailtemplates.model.sqla.models import MailModel, TemplateTranslation
         from sprox.sa.provider import SAORMProvider
         provider = SAORMProvider(session=DBSession, engine=False)
     elif tg.config.get('use_ming', False):
         log.info('Configuring MailTemplates for Ming')
-        from mailtemplates.model.ming.models import Template, TemplateTranslation
+        from mailtemplates.model.ming.models import MailModel, TemplateTranslation
         from sprox.mg.provider import MingProvider
         provider = MingProvider(DBSession)
     else:

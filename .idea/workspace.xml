@@ -2,23 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ccabbc6-9c47-4448-b2b7-ac26700979c9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/tgapp-mailtemplates.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mailtemplates/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mailtemplates/model/ming/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mailtemplates/model/ming/models.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/base.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/controllers/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/controllers/root.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/templates/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/templates/master.xhtml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/test_controller.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/test_controller_auth.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mailtemplates/bootstrap.py" afterPath="$PROJECT_DIR$/mailtemplates/bootstrap.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mailtemplates/controllers/root.py" afterPath="$PROJECT_DIR$/mailtemplates/controllers/root.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mailtemplates/helpers.py" afterPath="$PROJECT_DIR$/mailtemplates/helpers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mailtemplates/model/__init__.py" afterPath="$PROJECT_DIR$/mailtemplates/model/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mailtemplates/model/ming/models.py" afterPath="$PROJECT_DIR$/mailtemplates/model/ming/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mailtemplates/model/sqla/models.py" afterPath="$PROJECT_DIR$/mailtemplates/model/sqla/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mailtemplates/public/css/style.css" afterPath="$PROJECT_DIR$/mailtemplates/public/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mailtemplates/templates/index.xhtml" afterPath="$PROJECT_DIR$/mailtemplates/templates/index.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.py" afterPath="$PROJECT_DIR$/setup.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/base.py" afterPath="$PROJECT_DIR$/tests/base.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_controller.py" afterPath="$PROJECT_DIR$/tests/test_controller.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,177 +28,98 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mailtemplates/model/__init__.py">
+      <file leaf-file-name="test_controller.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/test_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="27" lean-forward="false" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
-              <folding>
-                <element signature="e#24#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="provider.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/sprox/sa/provider.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="72" column="16" lean-forward="false" selection-start-line="72" selection-start-column="16" selection-end-line="72" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="provider.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/sprox/mg/provider.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="504" column="0" lean-forward="false" selection-start-line="504" selection-start-column="0" selection-end-line="504" selection-end-column="0" />
-              <folding>
-                <marker date="1498212220000" expanded="true" signature="1511:2376" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="1588:2324" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="1761:2299" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="1828:1924" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="2411:2634" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="2674:2919" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="2756:2895" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="2956:3054" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="3083:3186" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="3229:3356" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="3398:3476" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="3532:3731" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="3802:5156" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="3811:4192" ph="&quot;&quot;&quot;Get the name of the field which first matches the possible colums...&quot;&quot;&quot;" />
-                <marker date="1498212220000" expanded="true" signature="4230:4396" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="4410:4580" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="4488:4580" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="4650:5062" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="4689:4807" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="4736:4807" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="4895:5013" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="4942:5013" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="5239:7323" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="5248:5836" ph="&quot;&quot;&quot;Get all dropdown options for a given entity field....&quot;&quot;&quot;" />
-                <marker date="1498212220000" expanded="true" signature="6112:6671" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="6207:6375" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="6291:6375" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="6870:6980" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="7063:7179" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="7361:7554" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="7588:7691" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="7730:7781" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="7829:7985" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="8025:8165" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="8213:8577" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="8356:8470" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="8618:8853" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="8694:8824" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="8938:8990" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="9040:10416" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="9290:10378" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="9485:9628" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="9646:9761" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="9800:9869" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="9910:10378" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="10022:10185" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="10467:10489" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="10531:10634" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="10684:11892" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="10763:10823" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="10874:11046" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="11213:11366" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="11403:11575" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="11611:11853" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="11940:12777" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="12110:12210" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="12325:12613" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="12816:13245" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="12987:13173" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="13267:13333" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="13404:13615" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="13682:13761" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="13818:14493" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="14221:14452" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="14532:14685" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="14785:16027" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="14948:16004" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="14983:16004" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="15079:15243" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="15274:15500" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="15295:15430" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="16092:17932" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="16174:17910" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="16209:17910" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="16460:16788" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="16538:16714" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="17439:17576" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="17614:17910" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="18190:18316" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="18344:18679" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="18793:18937" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="19147:19515" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="19349:19483" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="19624:19924" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="19719:19833" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="19970:20269" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="20065:20179" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="20321:20659" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="20711:20973" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="20720:20893" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-                <marker date="1498212220000" expanded="true" signature="21038:21172" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="21225:21314" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="21366:21524" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="21438:21503" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="21584:22420" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="21697:22403" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="21920:22375" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="21978:22375" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="22156:22264" ph="..." />
-                <marker date="1498212220000" expanded="true" signature="22290:22375" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="plug.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/tgext/pluggable/plug.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="29" column="35" lean-forward="false" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="adapt_models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/tgext/pluggable/adapt_models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-15">
-              <caret line="14" column="37" lean-forward="false" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="session_wrapper.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/tgext/pluggable/session_wrapper.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="450">
+              <caret line="33" column="3" lean-forward="false" selection-start-line="33" selection-start-column="3" selection-end-line="40" selection-end-column="0" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <marker date="1400575863000" expanded="true" signature="159:168" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="root.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.xhtml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mailtemplates/templates/index.xhtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="helpers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mailtemplates/helpers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mailtemplates/public/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+              <folding>
+                <marker date="1498233999000" expanded="true" signature="83:110" ph="{...}" />
+                <marker date="1498233999000" expanded="true" signature="128:196" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mailtemplates/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="60" lean-forward="true" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mailtemplates/templates/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mailtemplates/model/sqla/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="30" lean-forward="false" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mailtemplates/model/ming/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="root.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mailtemplates/controllers/root.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="345">
+              <caret line="23" column="42" lean-forward="true" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
               <folding>
                 <element signature="e#46#55#0" expanded="true" />
               </folding>
@@ -211,13 +127,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/base.py">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mailtemplates/model/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="772">
-              <caret line="167" column="25" lean-forward="false" selection-start-line="167" selection-start-column="25" selection-end-line="167" selection-end-column="25" />
+            <state relative-caret-position="420">
+              <caret line="28" column="61" lean-forward="false" selection-start-line="28" selection-start-column="61" selection-end-line="28" selection-end-column="61" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#24#38#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -242,6 +158,11 @@
       <find>PluggableSession</find>
       <find>setup_ming</find>
       <find>def query</find>
+      <find>boot</find>
+      <find>Class Obje</find>
+      <find>bootstrap</find>
+      <find>&lt;td&gt;                                                      &lt;/td&gt;</find>
+      <find>row</find>
     </findStrings>
     <replaceStrings>
       <replace>MailTemplates</replace>
@@ -269,21 +190,25 @@
         <option value="$PROJECT_DIR$/mailtemplates/mailtemplates/controllers/root.py" />
         <option value="$PROJECT_DIR$/mailtemplates/templates/translations.xhtml" />
         <option value="$PROJECT_DIR$/mailtemplates/partials.py" />
-        <option value="$PROJECT_DIR$/mailtemplates/bootstrap.py" />
-        <option value="$PROJECT_DIR$/mailtemplates/templates/index.xhtml" />
         <option value="$PROJECT_DIR$/mailtemplates/__init__.py" />
         <option value="$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/tgext/pluggable/adapt_controllers.py" />
-        <option value="$PROJECT_DIR$/tests/test_controller.py" />
         <option value="$PROJECT_DIR$/tests/test_controller_auth.py" />
-        <option value="$PROJECT_DIR$/mailtemplates/controllers/root.py" />
         <option value="$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/tg/configuration/app_config.py" />
-        <option value="$PROJECT_DIR$/tests/base.py" />
-        <option value="$PROJECT_DIR$/mailtemplates/model/__init__.py" />
         <option value="$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/tgext/pluggable/session_wrapper.py" />
         <option value="$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/sprox/mg/provider.py" />
-        <option value="$PROJECT_DIR$/mailtemplates/model/ming/models.py" />
-        <option value="$PROJECT_DIR$/mailtemplates/model/sqla/models.py" />
+        <option value="$PROJECT_DIR$/tests/base.py" />
         <option value="$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/tgext/pluggable/plug.py" />
+        <option value="$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/tgext/pluggable/adapt_websetup.py" />
+        <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/mailtemplates/model/__init__.py" />
+        <option value="$PROJECT_DIR$/mailtemplates/bootstrap.py" />
+        <option value="$PROJECT_DIR$/mailtemplates/model/ming/models.py" />
+        <option value="$PROJECT_DIR$/mailtemplates/helpers.py" />
+        <option value="$PROJECT_DIR$/mailtemplates/model/sqla/models.py" />
+        <option value="$PROJECT_DIR$/mailtemplates/public/css/style.css" />
+        <option value="$PROJECT_DIR$/mailtemplates/controllers/root.py" />
+        <option value="$PROJECT_DIR$/mailtemplates/templates/index.xhtml" />
+        <option value="$PROJECT_DIR$/tests/test_controller.py" />
       </list>
     </option>
   </component>
@@ -323,6 +248,78 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; Python 2.7.10 virtualenv at ~/work-new/virtualenvs/mailtemplate &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-packages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; Python 2.7.10 virtualenv at ~/work-new/virtualenvs/mailtemplate &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-packages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pyquery" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; Python 2.7.10 virtualenv at ~/work-new/virtualenvs/mailtemplate &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; Python 2.7.10 virtualenv at ~/work-new/virtualenvs/mailtemplate &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="python2.7" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="tgapp-mailtemplates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -337,7 +334,159 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sqla" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tgapp-mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mailtemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -600,6 +749,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="0ccabbc6-9c47-4448-b2b7-ac26700979c9" name="Default" comment="" />
@@ -645,42 +797,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/templates/master.xhtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mailtemplates/README.rst" />
-    <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/webtest/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#247#278#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/sqlalchemy/sql/sqltypes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3645">
-          <caret line="206" column="22" lean-forward="true" selection-start-line="206" selection-start-column="22" selection-end-line="206" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mailtemplates/mailtemplates/templates/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/mailtemplates/mailtemplates/templates/partials/__init__.py" />
     <entry file="file://$PROJECT_DIR$/mailtemplates/mailtemplates/templates/partials/table.xhtml" />
     <entry file="file://$PROJECT_DIR$/mailtemplates/mailtemplates/controllers/partials.py" />
     <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/sqlalchemy/orm/__init__.py">
@@ -727,22 +843,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mailtemplates/helpers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="47" lean-forward="true" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mailtemplates/bootstrap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="24" column="39" lean-forward="false" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mailtemplates/controllers/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -755,30 +855,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mailtemplates/templates/index.xhtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="34" lean-forward="false" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mailtemplates/templates/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/controllers/root.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="36" lean-forward="true" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -815,29 +891,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mailtemplates/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="60" lean-forward="true" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/this.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="38" lean-forward="false" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -853,24 +911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="724" column="53" lean-forward="true" selection-start-line="724" selection-start-column="53" selection-end-line="724" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mailtemplates/model/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="27" lean-forward="false" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
-          <folding>
-            <element signature="e#24#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/sprox/sa/provider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="72" column="16" lean-forward="false" selection-start-line="72" selection-start-column="16" selection-end-line="72" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -984,42 +1024,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mailtemplates/model/ming/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="39" lean-forward="true" selection-start-line="18" selection-start-column="39" selection-end-line="18" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mailtemplates/model/sqla/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="29" lean-forward="true" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="772">
-          <caret line="167" column="25" lean-forward="false" selection-start-line="167" selection-start-column="25" selection-end-line="167" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/tgext/pluggable/session_wrapper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="false" />
             <marker date="1400575863000" expanded="true" signature="159:168" ph="..." />
           </folding>
         </state>
@@ -1033,20 +1043,183 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/controllers/root.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="36" lean-forward="true" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/tgext/pluggable/plug.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="29" column="35" lean-forward="false" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+        <state relative-caret-position="293">
+          <caret line="129" column="34" lean-forward="false" selection-start-line="129" selection-start-column="34" selection-end-line="129" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/tgext/pluggable/adapt_websetup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="562">
+          <caret line="48" column="50" lean-forward="false" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/sprox/sa/provider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="471" column="70" lean-forward="false" selection-start-line="471" selection-start-column="70" selection-end-line="471" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/pyquery/ajax.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../virtualenvs/mailtemplate/lib/python2.7/site-packages/pyquery/pyquery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10892">
+          <caret line="742" column="8" lean-forward="false" selection-start-line="742" selection-start-column="8" selection-end-line="742" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="12" lean-forward="false" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="174" column="4" lean-forward="false" selection-start-line="174" selection-start-column="4" selection-end-line="174" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mailtemplates/bootstrap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="63" lean-forward="false" selection-start-line="18" selection-start-column="63" selection-end-line="18" selection-end-column="63" />
+          <folding>
+            <element signature="e#66#103#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mailtemplates/helpers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mailtemplates/model/sqla/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="30" lean-forward="false" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mailtemplates/templates/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mailtemplates/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="60" lean-forward="true" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mailtemplates/public/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding>
+            <marker date="1498233999000" expanded="true" signature="83:110" ph="{...}" />
+            <marker date="1498233999000" expanded="true" signature="128:196" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mailtemplates/model/ming/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mailtemplates/controllers/root.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="345">
+          <caret line="23" column="42" lean-forward="true" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
           <folding>
             <element signature="e#46#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mailtemplates/model/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="61" lean-forward="false" selection-start-line="28" selection-start-column="61" selection-end-line="28" selection-end-column="61" />
+          <folding>
+            <element signature="e#24#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mailtemplates/templates/index.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="33" column="3" lean-forward="false" selection-start-line="33" selection-start-column="3" selection-end-line="40" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,4 +1,6 @@
 from sqlalchemy import ForeignKey, Column
+from sqlalchemy import String
+from sqlalchemy import Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.types import Unicode, Integer
 from sqlalchemy.orm import backref, relation
@@ -8,27 +10,26 @@ from tgext.pluggable import app_model, primary_key
 DeclarativeBase = declarative_base()
 
 
-class Template(DeclarativeBase):
-    __tablename__ = 'mailtemplates_templates'
+class MailModel(DeclarativeBase):
+    __tablename__ = 'mailtemplates_mail_models'
 
-    uid = Column(Integer, autoincrement=True, primary_key=True)
-    name = Column(Unicode(16))
-    usage = Column(Unicode())
-
+    _id = Column(Integer, autoincrement=True, primary_key=True)
+    name = Column(Unicode(1000))
+    usage = Column(Unicode(1000))
 
 
 class TemplateTranslation(DeclarativeBase):
-    __tablename__ = 'mailtemplates_translations'
+    __tablename__ = 'mailtemplates_template_translations'
 
-    uid = Column(Integer, autoincrement=True, primary_key=True)
+    _id = Column(Integer, autoincrement=True, primary_key=True)
 
-    template_id = Column(Integer, ForeignKey(primary_key(Template)))
-    template = relation(Template, backref=backref('translations'))
+    mail_model_id = Column(Integer, ForeignKey(primary_key(MailModel)))
+    mail_model = relation(MailModel, backref=backref('template_translations'))
 
-    language = Column(Unicode())
+    language = Column(Unicode(10))
 
-    subject = Column(Unicode())
-    body = Column(Unicode())
+    subject = Column(String(100))
+    body = Column(Text())
 
 
 

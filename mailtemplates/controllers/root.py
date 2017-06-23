@@ -13,7 +13,14 @@ class RootController(TGController):
 
     @expose('kajiki:mailtemplates.templates.index')
     @expose('genshi:mailtemplates.templates.index')
-    @paginate('templates', items_per_page=tg.config.get('pagination.item_per_page', 20))
+    @paginate('mail_models', items_per_page=tg.config.get('pagination.item_per_page', 20))
     def index(self):
-        __, templates = model.provider.query(model.Template, filters=dict())
-        return dict(templates=templates)
+        __, mail_models = model.provider.query(model.MailModel, filters=dict())
+        return dict(mail_models=mail_models)
+
+    @expose('kajiki:mailtemplates.templates.index')
+    @expose('genshi:mailtemplates.templates.index')
+    @paginate('mail_models', items_per_page=tg.config.get('pagination.item_per_page', 20))
+    def mail_model(self, id, translation):
+        __, mail_models = model.provider.query(model.MailModel, filters=dict())
+        return dict(mail_models=mail_models)
