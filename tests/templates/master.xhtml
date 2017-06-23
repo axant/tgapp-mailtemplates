@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="${response.charset}" />
+  <title py:block="master_title">Your generic title goes here</title>
+
+  <py:block name="head"></py:block>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Flash messages -->
+    <py:with vars="flash=tg.flash_obj.render('flash', use_js=False)">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div py:if="flash" py:replace="Markup(flash)" />
+        </div>
+      </div>
+    </py:with>
+
+    <!-- Main included content -->
+    <py:block name="body"></py:block>
+  </div>
+</body>
+
+</html>
