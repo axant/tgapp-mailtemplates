@@ -32,4 +32,14 @@
 
 .mail-templates-title{
     font-size: 36px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.btn-create-translation{
+    margin-right: 5%;
+}
+
+.btn-edit-translation{
+    padding: 6px 22px;
 }
