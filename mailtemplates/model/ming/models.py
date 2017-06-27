@@ -12,8 +12,8 @@ class MailModel(MappedClass):
         indexes = [('name',)]
 
     _id = FieldProperty(s.ObjectId)
-    name = FieldProperty(s.String, required=True, if_missing=u"Untitled")
-    usage = FieldProperty(s.String)
+    name = FieldProperty(s.String, required=True)
+    usage = FieldProperty(s.String, required=True)
 
 
 class TemplateTranslation(MappedClass):
@@ -24,7 +24,7 @@ class TemplateTranslation(MappedClass):
 
     _id = FieldProperty(s.ObjectId)
     mail_models = RelationProperty('MailModel')
-    language = FieldProperty(s.String)
+    language = FieldProperty(s.String, required=True)
     subject = FieldProperty(s.String)
     body = FieldProperty(s.String)
 

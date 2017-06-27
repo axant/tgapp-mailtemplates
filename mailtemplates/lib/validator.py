@@ -11,3 +11,13 @@ class KajikiTemplateValidator(formencode.FancyValidator):
         except:
             raise formencode.Invalid(_('Template not valid.'), value, state)
         return value
+
+
+class KajikiTextTemplateValidator(formencode.FancyValidator):
+
+    def _convert_to_python(self, value, state):
+        try:
+            kajiki.TextTemplate(unicode(value))
+        except:
+            raise formencode.Invalid(_('Template not valid.'), value, state)
+        return value

@@ -24,7 +24,7 @@ testpkgs = ['WebTest >= 1.2.3',
           'tw2.forms',
           'kajiki',
           'tgext.mailer',
-            'pyquery']
+          'pyquery']
 here = os.path.abspath(os.path.dirname(__file__))
 try:
     README = open(os.path.join(here, 'README.rst')).read()

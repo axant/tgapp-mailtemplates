@@ -7,7 +7,7 @@
 
 <body py:block="body" py:strip="True">
     <div class="mail-templates-title">Dashboard MailTemplates</div>
-    <a href="" class="pull-right">Add Model</a>
+    <a href="${tg.url('/mailtemplates/new_model')}" class="pull-right">Add Model</a>
     <div class="row">
         <div class="col-md-12">
             <div py:for="model in mail_models" class="panel panel-primary panel-model ${model.name}-class">

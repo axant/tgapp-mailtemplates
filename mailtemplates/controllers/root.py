@@ -3,10 +3,11 @@
 import tg
 from mailtemplates.lib.validator import KajikiTemplateValidator
 from tg import TGController
+from tg import config
 from tg import expose, flash, require, url, lurl, request, redirect, validate
 from tg.decorators import paginate
 from tg.i18n import ugettext as _
-from mailtemplates.lib.forms import CreateTranslationForm, EditTranslationForm
+from mailtemplates.lib.forms import CreateTranslationForm, EditTranslationForm, NewModelForm
 
 from mailtemplates import model
 
@@ -70,6 +71,24 @@ class RootController(TGController):
         tg.flash(_('Translation edited.'))
         return redirect(url('index'))
 
+    @expose('kajiki:mailtemplates.templates.new_model')
+    @expose('genshi:mailtemplates.templates.new_model')
+    def new_model(self, **kwargs):
+        default_language = config['_mailtemplates']['default_language']
+        return dict(form=NewModelForm, values=dict(language=default_language))
+
+
+    @expose()
+    @validate(NewModelForm, error_handler=new_model)
+    def create_model(self, **kwargs):
+        mail_model = model.provider.create(model.MailModel, dict(name=kwargs.get('name'), usage=kwargs.get('usage')))
+        new_translation = model.provider.create(model.TemplateTranslation, dict(language=kwargs.get('language'),
+                                                                                mail_model=mail_model,
+                                                                                subject=kwargs.get('subject'),
+                                                                                body=kwargs.get('body')))
+        tg.flash(_('Model created.'))
+        return redirect(url('index'))
+
     @expose('kajiki:mailtemplates.templates.new_translation')
     @expose('genshi:mailtemplates.templates.new_translation')
     @validate(CreateTranslationForm, error_handler=new_translation)
@@ -80,6 +99,13 @@ class RootController(TGController):
     @expose('kajiki:mailtemplates.templates.new_translation')
     @expose('genshi:mailtemplates.templates.new_translation')
     @validate(EditTranslationForm, error_handler=edit_translation)
-    def validate_template(self, **kwargs):
+    def validate_template_edit(self, **kwargs):
         tg.flash("Email template valid.")
         return dict(form=EditTranslationForm, values=kwargs)
+
+    @expose('kajiki:mailtemplates.templates.new_translation')
+    @expose('genshi:mailtemplates.templates.new_translation')
+    @validate(NewModelForm, error_handler=new_model)
+    def validate_template_model(self, **kwargs):
+        tg.flash("Email template valid.")
+        return dict(form=NewModelForm, values=kwargs)
