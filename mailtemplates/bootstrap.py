@@ -9,10 +9,22 @@ from tgext.pluggable import app_model
 def bootstrap(command, conf, vars):
     print('Bootstrapping mailtemplates...')
 
+    __, managers = model.provider.query(app_model.Group, filters=dict(group_name='managers'))
+    if managers:
+        manager = managers[0]
+        model.provider.create(app_model.Permission, dict(permission_name=u'mailtemplates_user',
+                                                         description=u'This permission allow access to the '
+                                                                     u'mailtemplates pluggable',
+                                                         groups=[manager]
+                                                         )
+                              )
+
     t1 = model.provider.create(model.MailModel, dict(name=u'Email', usage=u'Usage'))
     t2 = model.provider.create(model.MailModel, dict(name=u'Email1',
-                                                    usage=u'This is the description of the email content, including the '
-                                                          u'usage of the email in his context'))
+                                                     usage=u'This is the description of the email content, including '
+                                                           u'the usage of the email in his context'
+                                                     )
+                               )
     model.DBSession.flush()
 
     tr1 = model.provider.create(model.TemplateTranslation,

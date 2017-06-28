@@ -1,18 +1,23 @@
 # -*- coding: utf-8 -*-
 """Main Controller"""
 import tg
+from tg import predicates
+
+from mailtemplates.lib import send_email
 from mailtemplates.lib.validator import KajikiTemplateValidator
 from tg import TGController
 from tg import config
 from tg import expose, flash, require, url, lurl, request, redirect, validate
 from tg.decorators import paginate
 from tg.i18n import ugettext as _
-from mailtemplates.lib.forms import CreateTranslationForm, EditTranslationForm, NewModelForm
+from mailtemplates.lib.forms import CreateTranslationForm, EditTranslationForm, NewModelForm, TestEmailForm
 
 from mailtemplates import model
 
 
 class RootController(TGController):
+    allow_only = predicates.has_permission('mailtemplates_user')
+
     @expose('kajiki:mailtemplates.templates.index')
     @expose('genshi:mailtemplates.templates.index')
     @paginate('mail_models', items_per_page=tg.config.get('pagination.item_per_page', 20))
@@ -87,6 +92,25 @@ class RootController(TGController):
                                                                                 subject=kwargs.get('subject'),
                                                                                 body=kwargs.get('body')))
         tg.flash(_('Model created.'))
+        return redirect(url('index'))
+
+    @expose('kajiki:mailtemplates.templates.test_email')
+    @expose('genshi:mailtemplates.templates.test_email')
+    def test_email(self, **kwargs):
+        return dict(form=TestEmailForm, values={'translation_id': kwargs.get('translation_id')})
+
+    @expose()
+    @validate(TestEmailForm, error_handler=test_email)
+    def send_test_email(self, **kwargs):
+        __, translations = model.provider.query(model.TemplateTranslation, filters=dict(_id=kwargs.get('translation_id')))
+        if not translations:
+            return tg.abort(404)
+        translation = translations[0]
+
+        send_email(recipients=[kwargs.get('email')], sender=tg.config.get('mail.username', 'no-reply@axantweb.com'),
+                   mail_model_name=translation.mail_model.name,
+                   translation=translation.language, test_mode=True)
+        tg.flash(_('Test email sent to %s' % kwargs.get('email')))
         return redirect(url('index'))
 
     @expose('kajiki:mailtemplates.templates.new_translation')

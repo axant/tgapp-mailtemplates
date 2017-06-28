@@ -20,7 +20,7 @@ def format_rich_mail(title, body):
                            template_name='movieday.templates.email.md_rich_email')
 
 
-def send_email(recipients, sender, mail_model_name, translation=None, data=None, subject_data=None):
+def send_email(recipients, sender, mail_model_name, translation=None, data=None, subject_data=None, test_mode=False):
     """
     Method for sending email in this pluggable. Use this method to send your email, specifying the name of a MailModel and
     the language of the email (optionally).
@@ -35,6 +35,9 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
         Plugin option will be used.
     :param data: A dictionary representing the variables used in the email template, like ${name}
     :param subject_data:  A dictionary representing the variables used in the email subject, like ${name}
+    :param test_mode: A flag for using this function in test mode. With test mode active, you don't have to pass to the
+        template the variables associated. Instead, the variables were be filled with their names. E.g. If you have a
+        variable named ${name} in your template, you'll se in the test mail ${name} in his position.
     """
     __, mail_models = model.provider.query(model.MailModel, filters=dict(name=mail_model_name))
     if not mail_models:
@@ -49,7 +52,8 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
         raise Exception('Translation for this mail model not found')
     tr = translations[0]
 
-    Template = kajiki.XMLTemplate(tr.body)
+    body = tr.body if not test_mode else tr.body.replace('$', '$$')
+    Template = kajiki.XMLTemplate(body)
     Template.loader = tg.config['render_functions']['kajiki'].loader
 
     html = Template(data).render()

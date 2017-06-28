@@ -2,7 +2,7 @@ from formencode.validators import UnicodeString
 from mailtemplates.lib.validator import KajikiTemplateValidator, KajikiTextTemplateValidator
 from tw2.forms import HiddenField
 from tg.i18n import lazy_ugettext as l_
-
+import tw2.core as twc
 from tw2.forms.widgets import Form, BaseLayout, TextField, TextArea, SubmitButton
 
 
@@ -52,6 +52,8 @@ class CreateTranslationForm(Form):
 
     </div>
      <input type="submit" class="btn btn-warning col-md-1 col-md-push-10" formaction="validate_template" value="Validate"></input>
+
+
 
 </div>
 '''
@@ -114,6 +116,7 @@ class EditTranslationForm(Form):
 
     </div>
      <input type="submit" class="btn btn-warning col-md-1 col-md-push-10" formaction="validate_template_edit" value="Validate"></input>
+    <a href="/mailtemplates/test_email?translation_id=${w.children_hidden[0].value}" class="btn btn-default"> Send Test Email</a>
 
 </div>
 '''
@@ -213,3 +216,40 @@ class NewModelForm(Form):
                         validator=KajikiTemplateValidator())
 
     submit = SubmitButton(css_class='btn btn-primary pull-right', value=l_('Create'))
+
+
+class TestEmailForm(Form):
+    action = 'send_test_email'
+
+    class child(BaseLayout):
+        inline_engine_name = 'kajiki'
+
+        template = '''
+
+<div py:strip="">
+    <py:for each="c in w.children_hidden">
+        ${c.display()}
+    </py:for>
+
+    <div class="form form-horizontal">
+        <div class="form-group">
+        <div class="mail-templates-title">Send Test Email</div>
+            <div class="col-md-12">
+             <div py:with="c=w.children.email"
+                     class="form-group ${c.error_msg and 'has-error' or ''}">
+                    <label for="${c.compound_id}" class="col-md-3 control-label">${c.label}</label>
+                    <div class="col-md-9">
+                        ${c.display()}
+                        <span class="help-block" py:content="c.error_msg"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+'''
+        translation_id = HiddenField()
+        email = TextField(label='Recipient', css_class='form-control',
+                          validator=twc.EmailValidator(not_empty=True))
+
+    submit = SubmitButton(css_class='btn btn-primary pull-right', value=l_('Send'))
