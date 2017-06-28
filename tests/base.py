@@ -96,8 +96,7 @@ class FakeMingModel(object):
 class FakeUser(bson.ObjectId):
     """
     Fake user that emulates an users without the need to actually
-    query it from the database, it is able to trick sprox when
-    resolving relations to the blog post Author.
+    query it from the database
     """
     def __int__(self):
         return 1
@@ -112,7 +111,7 @@ class FakeUser(bson.ObjectId):
 
 class TestAuthMetadata(TGAuthMetadata):
     def authenticate(self, environ, identity):
-        return 'user'
+        return 'manager'
 
     def get_user(self, identity, userid):
         if userid:
@@ -121,6 +120,11 @@ class TestAuthMetadata(TGAuthMetadata):
     def get_groups(self, identity, userid):
         if userid:
             return ['managers']
+        return []
+
+    def get_permissions(self, identity, userid):
+        if userid:
+            return ['mailtemplates_user']
         return []
 
 def configure_app(using):
@@ -158,7 +162,7 @@ def configure_app(using):
     # configurations of TGApps. Otherwise the validated
     # form would be different from the displayed one.
 
-    #plug(app_cfg, 'tgext.mailer', plug_bootstrap=True, debugmailer='dummy')
+    plug(app_cfg, 'tgext.mailer', plug_bootstrap=True, debugmailer='dummy')
     plug(app_cfg, 'mailtemplates', plug_bootstrap=True)
     return app_cfg
 
@@ -167,7 +171,7 @@ def create_app(app_config, auth=False):
 
     app = app_config.make_wsgi_app(skip_authentication=True)
     if auth:
-        return TestApp(app, extra_environ=dict(REMOTE_USER='user'))
+        return TestApp(app, extra_environ=dict(REMOTE_USER='manager'))
     else:
         return TestApp(app)
 

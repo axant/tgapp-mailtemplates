@@ -116,8 +116,7 @@ class EditTranslationForm(Form):
 
     </div>
      <input type="submit" class="btn btn-warning col-md-1 col-md-push-10" formaction="validate_template_edit" value="Validate"></input>
-    <a href="/mailtemplates/test_email?translation_id=${w.children_hidden[0].value}" class="btn btn-default"> Send Test Email</a>
-
+     <input type="submit" class="btn btn-default" formaction="test_email" value="Send test email"></input>
 </div>
 '''
         translation_id = HiddenField()
@@ -129,7 +128,7 @@ class EditTranslationForm(Form):
         body = TextArea(label='Email content', rows=10, css_class='form-control',
                         validator=KajikiTemplateValidator())
 
-    submit = SubmitButton(css_class='btn btn-primary pull-right btn-edit-translation', value=l_('Edit'))
+    submit = SubmitButton(css_class='btn btn-primary pull-right btn-edit-translation', value=l_('Save'))
 
 
 class NewModelForm(Form):
@@ -249,6 +248,8 @@ class TestEmailForm(Form):
 </div>
 '''
         translation_id = HiddenField()
+        body = HiddenField()
+        subject = HiddenField()
         email = TextField(label='Recipient', css_class='form-control',
                           validator=twc.EmailValidator(not_empty=True))
 

@@ -5,7 +5,6 @@ from email.utils import parseaddr, formataddr
 from smtplib import SMTP
 
 import tg
-import turbomail as turbomail
 from markupsafe import Markup
 from tg import config, request, render_template
 from tgext.mailer import get_mailer, Message
@@ -63,7 +62,11 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
         subject = Template(subject_data).render()
     else:
         subject = tr.subject
+    _send_email(sender, recipients, subject, html)
 
+
+def _send_email(sender, recipients, subject, html, test_mode=False):
+    html = html if not test_mode else html.replace('$', '$$')
     mailer = get_mailer(request)
     message_to_send = Message(
         subject=subject,

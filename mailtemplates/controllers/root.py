@@ -3,7 +3,7 @@
 import tg
 from tg import predicates
 
-from mailtemplates.lib import send_email
+from mailtemplates.lib import send_email, _send_email
 from mailtemplates.lib.validator import KajikiTemplateValidator
 from tg import TGController
 from tg import config
@@ -22,13 +22,6 @@ class RootController(TGController):
     @expose('genshi:mailtemplates.templates.index')
     @paginate('mail_models', items_per_page=tg.config.get('pagination.item_per_page', 20))
     def index(self):
-        __, mail_models = model.provider.query(model.MailModel, filters=dict())
-        return dict(mail_models=mail_models)
-
-    @expose('kajiki:mailtemplates.templates.index')
-    @expose('genshi:mailtemplates.templates.index')
-    @paginate('mail_models', items_per_page=tg.config.get('pagination.item_per_page', 20))
-    def mail_model(self, id, translation):
         __, mail_models = model.provider.query(model.MailModel, filters=dict())
         return dict(mail_models=mail_models)
 
@@ -96,20 +89,16 @@ class RootController(TGController):
 
     @expose('kajiki:mailtemplates.templates.test_email')
     @expose('genshi:mailtemplates.templates.test_email')
+    @validate(EditTranslationForm, error_handler=edit_translation)
     def test_email(self, **kwargs):
-        return dict(form=TestEmailForm, values={'translation_id': kwargs.get('translation_id')})
+        return dict(form=TestEmailForm, values=kwargs)
 
     @expose()
     @validate(TestEmailForm, error_handler=test_email)
     def send_test_email(self, **kwargs):
-        __, translations = model.provider.query(model.TemplateTranslation, filters=dict(_id=kwargs.get('translation_id')))
-        if not translations:
-            return tg.abort(404)
-        translation = translations[0]
+        _send_email(recipients=[kwargs.get('email')], sender=tg.config.get('mail.username', 'no-reply@axantweb.com'),
+                    subject=kwargs.get('subject'), html=kwargs.get('body'), test_mode=True)
 
-        send_email(recipients=[kwargs.get('email')], sender=tg.config.get('mail.username', 'no-reply@axantweb.com'),
-                   mail_model_name=translation.mail_model.name,
-                   translation=translation.language, test_mode=True)
         tg.flash(_('Test email sent to %s' % kwargs.get('email')))
         return redirect(url('index'))
 

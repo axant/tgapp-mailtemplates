@@ -12,6 +12,7 @@ install_requires=[
     "TurboGears2 >= 2.3.9",
     "tgext.pluggable",
     "sprox >= 0.9.1",
+    "tgext.mailer"
 ]
 
 testpkgs = ['WebTest >= 1.2.3',
@@ -23,7 +24,6 @@ testpkgs = ['WebTest >= 1.2.3',
           'repoze.who',
           'tw2.forms',
           'kajiki',
-          'tgext.mailer',
           'pyquery']
 here = os.path.abspath(os.path.dirname(__file__))
 try:
