@@ -65,8 +65,7 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
     _send_email(sender, recipients, subject, html)
 
 
-def _send_email(sender, recipients, subject, html, test_mode=False):
-    html = html if not test_mode else html.replace('$', '$$')
+def _send_email(sender, recipients, subject, html):
     mailer = get_mailer(request)
     message_to_send = Message(
         subject=subject,

@@ -163,7 +163,7 @@ def configure_app(using):
     # form would be different from the displayed one.
 
     plug(app_cfg, 'tgext.mailer', plug_bootstrap=True, debugmailer='dummy')
-    plug(app_cfg, 'mailtemplates', plug_bootstrap=True)
+    plug(app_cfg, 'mailtemplates', plug_bootstrap=True, default_language='IT')
     return app_cfg
 
 

@@ -1,5 +1,5 @@
 from formencode.validators import UnicodeString
-from mailtemplates.lib.validator import KajikiTemplateValidator, KajikiTextTemplateValidator
+from mailtemplates.lib.validator import KajikiTemplateValidator, KajikiTextTemplateValidator, UniqueLanguageValidator
 from tw2.forms import HiddenField
 from tg.i18n import lazy_ugettext as l_
 import tw2.core as twc
@@ -59,7 +59,7 @@ class CreateTranslationForm(Form):
 '''
         model_id = HiddenField()
         language = TextField(label='Language', css_class='form-control',
-                             validator=UnicodeString(not_empty=True, outputEncoding=None))
+                             validator=UniqueLanguageValidator(not_empty=True, outputEncoding=None))
         subject = TextField(label='Subject', css_class='form-control',
                             validator=KajikiTextTemplateValidator())
 

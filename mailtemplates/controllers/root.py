@@ -3,11 +3,10 @@
 import tg
 from tg import predicates
 
-from mailtemplates.lib import send_email, _send_email
-from mailtemplates.lib.validator import KajikiTemplateValidator
+from mailtemplates.lib import _send_email
 from tg import TGController
 from tg import config
-from tg import expose, flash, require, url, lurl, request, redirect, validate
+from tg import expose, url, redirect, validate
 from tg.decorators import paginate
 from tg.i18n import ugettext as _
 from mailtemplates.lib.forms import CreateTranslationForm, EditTranslationForm, NewModelForm, TestEmailForm
@@ -62,6 +61,11 @@ class RootController(TGController):
         __, translations = model.provider.query(model.TemplateTranslation, filters=dict(_id=kwargs.get('translation_id')))
         if not translations:
             return tg.abort(404)
+        __, translations_already_in = model.provider.query(model.TemplateTranslation, filters=dict(language=kwargs.get('language')))
+        if translations_already_in and translations[0].language != kwargs.get('language'):
+            tg.flash(_('Template for this language already created.'), 'error')
+            return redirect(url('edit_translation', params=dict(translation_id=str(kwargs.get('translation_id')))))
+
         model.provider.update(model.TemplateTranslation, dict(_id=kwargs.get('translation_id'),
                                                               language=kwargs.get('language'),
                                                               subject=kwargs.get('subject'),
@@ -97,7 +101,7 @@ class RootController(TGController):
     @validate(TestEmailForm, error_handler=test_email)
     def send_test_email(self, **kwargs):
         _send_email(recipients=[kwargs.get('email')], sender=tg.config.get('mail.username', 'no-reply@axantweb.com'),
-                    subject=kwargs.get('subject'), html=kwargs.get('body'), test_mode=True)
+                    subject=kwargs.get('subject'), html=kwargs.get('body'))
 
         tg.flash(_('Test email sent to %s' % kwargs.get('email')))
         return redirect(url('index'))
