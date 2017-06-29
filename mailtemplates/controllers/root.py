@@ -15,7 +15,7 @@ from mailtemplates import model
 
 
 class RootController(TGController):
-    allow_only = predicates.has_permission('mailtemplates_user')
+    allow_only = predicates.has_permission('mailtemplates')
 
     @expose('kajiki:mailtemplates.templates.index')
     @expose('genshi:mailtemplates.templates.index')
@@ -113,15 +113,15 @@ class RootController(TGController):
         tg.flash("Email template valid.")
         return dict(form=CreateTranslationForm, values=kwargs)
 
-    @expose('kajiki:mailtemplates.templates.new_translation')
-    @expose('genshi:mailtemplates.templates.new_translation')
+    @expose('kajiki:mailtemplates.templates.edit_translation')
+    @expose('genshi:mailtemplates.templates.edit_translation')
     @validate(EditTranslationForm, error_handler=edit_translation)
     def validate_template_edit(self, **kwargs):
         tg.flash("Email template valid.")
         return dict(form=EditTranslationForm, values=kwargs)
 
-    @expose('kajiki:mailtemplates.templates.new_translation')
-    @expose('genshi:mailtemplates.templates.new_translation')
+    @expose('kajiki:mailtemplates.templates.new_model')
+    @expose('genshi:mailtemplates.templates.new_model')
     @validate(NewModelForm, error_handler=new_model)
     def validate_template_model(self, **kwargs):
         tg.flash("Email template valid.")

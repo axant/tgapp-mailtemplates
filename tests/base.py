@@ -124,7 +124,7 @@ class TestAuthMetadata(TGAuthMetadata):
 
     def get_permissions(self, identity, userid):
         if userid:
-            return ['mailtemplates_user']
+            return ['mailtemplates']
         return []
 
 def configure_app(using):

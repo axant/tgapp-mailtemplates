@@ -24,7 +24,7 @@ class CreateTranslationForm(Form):
             <div class="col-md-12">
                 <div py:with="c=w.children.language"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
-                    <label for="${c.compound_id}" class="col-md-3 control-label">${c.label}</label>
+                    <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
                     <div class="col-md-2">
                         ${c.display()}
                         <span class="help-block" py:content="c.error_msg"/>
@@ -32,16 +32,16 @@ class CreateTranslationForm(Form):
                 </div>
                 <div py:with="c=w.children.subject"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
-                    <label for="${c.compound_id}" class="col-md-3 control-label">${c.label}</label>
-                    <div class="col-md-9">
+                    <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
+                    <div class="col-md-10">
                         ${c.display()}
                         <span class="help-block" py:content="c.error_msg"/>
                     </div>
                 </div>
                 <div py:with="c=w.children.body"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
-                    <label for="${c.compound_id}" class="col-md-3 control-label">${c.label}</label>
-                    <div class="col-md-9">
+                    <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
+                    <div class="col-md-10">
                         ${c.display()}
                         <span class="help-block" py:content="c.error_msg"/>
                     </div>
@@ -88,7 +88,7 @@ class EditTranslationForm(Form):
             <div class="col-md-12">
                 <div py:with="c=w.children.language"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
-                    <label for="${c.compound_id}" class="col-md-3 control-label">${c.label}</label>
+                    <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
                     <div class="col-md-2">
                         ${c.display()}
                         <span class="help-block" py:content="c.error_msg"/>
@@ -96,16 +96,16 @@ class EditTranslationForm(Form):
                 </div>
                 <div py:with="c=w.children.subject"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
-                    <label for="${c.compound_id}" class="col-md-3 control-label">${c.label}</label>
-                    <div class="col-md-9">
+                    <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
+                    <div class="col-md-10">
                         ${c.display()}
                         <span class="help-block" py:content="c.error_msg"/>
                     </div>
                 </div>
                 <div py:with="c=w.children.body"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
-                    <label for="${c.compound_id}" class="col-md-3 control-label">${c.label}</label>
-                    <div class="col-md-9">
+                    <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
+                    <div class="col-md-10">
                         ${c.display()}
                         <span class="help-block" py:content="c.error_msg"/>
                     </div>
@@ -150,16 +150,16 @@ class NewModelForm(Form):
             <div class="col-md-12">
              <div py:with="c=w.children.name"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
-                    <label for="${c.compound_id}" class="col-md-3 control-label">${c.label}</label>
-                    <div class="col-md-9">
+                        <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
+                    <div class="col-md-10">
                         ${c.display()}
                         <span class="help-block" py:content="c.error_msg"/>
                     </div>
                 </div>
                 <div py:with="c=w.children.usage"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
-                    <label for="${c.compound_id}" class="col-md-3 control-label">${c.label}</label>
-                    <div class="col-md-9">
+                    <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
+                    <div class="col-md-10">
                         ${c.display()}
                          <span class="help-block" py:content="c.error_msg"/>
                          <span class="help-block"> This is the description of the usage of this new email,
@@ -170,7 +170,7 @@ class NewModelForm(Form):
                 </div>
                 <div py:with="c=w.children.language"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
-                    <label for="${c.compound_id}" class="col-md-3 control-label">${c.label}</label>
+                    <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
                     <div class="col-md-2">
                         ${c.display()}
                         <span class="help-block" py:content="c.error_msg"/>
@@ -179,16 +179,16 @@ class NewModelForm(Form):
                 </div>
                 <div py:with="c=w.children.subject"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
-                    <label for="${c.compound_id}" class="col-md-3 control-label">${c.label}</label>
-                    <div class="col-md-9">
+                    <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
+                    <div class="col-md-10">
                         ${c.display()}
                         <span class="help-block" py:content="c.error_msg"/>
                     </div>
                 </div>
                 <div py:with="c=w.children.body"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
-                    <label for="${c.compound_id}" class="col-md-3 control-label">${c.label}</label>
-                    <div class="col-md-9">
+                    <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
+                    <div class="col-md-10">
                         ${c.display()}
                         <span class="help-block" py:content="c.error_msg"/>
                     </div>
@@ -236,8 +236,8 @@ class TestEmailForm(Form):
             <div class="col-md-12">
              <div py:with="c=w.children.email"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
-                    <label for="${c.compound_id}" class="col-md-3 control-label">${c.label}</label>
-                    <div class="col-md-9">
+                    <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
+                    <div class="col-md-10">
                         ${c.display()}
                         <span class="help-block" py:content="c.error_msg"/>
                     </div>

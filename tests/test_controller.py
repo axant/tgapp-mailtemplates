@@ -160,13 +160,16 @@ class MailTemplatesControllerTests(object):
         #
         # assert mail_model, mail_model
 
+
 class TestMailTemplatesControllerSQLA(MailTemplatesControllerTests):
+
     @classmethod
     def setupClass(cls):
         cls.app_config = configure_app('sqlalchemy')
 
 
 class TestMailTemplatesControllerMing(MailTemplatesControllerTests):
+
     @classmethod
     def setupClass(cls):
         cls.app_config = configure_app('ming')

@@ -9,10 +9,10 @@ except ImportError:
     from setuptools import setup, find_packages
 
 install_requires=[
-    "TurboGears2 >= 2.3.9",
     "tgext.pluggable",
     "sprox >= 0.9.1",
-    "tgext.mailer"
+    "tgext.mailer",
+    "kajiki",
 ]
 
 testpkgs = ['WebTest >= 1.2.3',
@@ -23,8 +23,8 @@ testpkgs = ['WebTest >= 1.2.3',
           'zope.sqlalchemy',
           'repoze.who',
           'tw2.forms',
-          'kajiki',
-          'pyquery']
+          'pyquery',
+            'TurboGears2 >= 2.3.9']
 here = os.path.abspath(os.path.dirname(__file__))
 try:
     README = open(os.path.join(here, 'README.rst')).read()

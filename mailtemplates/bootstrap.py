@@ -12,7 +12,7 @@ def bootstrap(command, conf, vars):
     __, managers = model.provider.query(app_model.Group, filters=dict(group_name='managers'))
     if managers:
         manager = managers[0]
-        model.provider.create(app_model.Permission, dict(permission_name=u'mailtemplates_user',
+        model.provider.create(app_model.Permission, dict(permission_name=u'mailtemplates',
                                                          description=u'This permission allow access to the '
                                                                      u'mailtemplates pluggable',
                                                          groups=[manager]
