@@ -29,7 +29,9 @@ class CreateTranslationForm(Form):
                         ${c.display()}
                         <span class="help-block" py:content="c.error_msg"/>
                     </div>
+                     <span class="alert alert-danger" py:for="error in w.rollup_errors"> ${error}</span>
                 </div>
+
                 <div py:with="c=w.children.subject"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
                     <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
@@ -59,13 +61,14 @@ class CreateTranslationForm(Form):
 '''
         model_id = HiddenField()
         language = TextField(label='Language', css_class='form-control',
-                             validator=UniqueLanguageValidator(not_empty=True, outputEncoding=None))
+                             validator=UnicodeString(not_empty=True, outputEncoding=None))
         subject = TextField(label='Subject', css_class='form-control',
                             validator=KajikiTextTemplateValidator())
 
         body = TextArea(label='Email content', rows=10, css_class='form-control',
                         validator=KajikiTemplateValidator())
 
+    validator = UniqueLanguageValidator('model_id', 'language')
     submit = SubmitButton(css_class='btn btn-primary pull-right', value=l_('Create'))
 
 
@@ -93,6 +96,7 @@ class EditTranslationForm(Form):
                         ${c.display()}
                         <span class="help-block" py:content="c.error_msg"/>
                     </div>
+                    <span class="alert alert-danger" py:for="error in w.rollup_errors"> ${error}</span>
                 </div>
                 <div py:with="c=w.children.subject"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
@@ -120,6 +124,7 @@ class EditTranslationForm(Form):
 </div>
 '''
         translation_id = HiddenField()
+        model_id = HiddenField()
         language = TextField(label='Language', css_class='form-control',
                              validator=UnicodeString(not_empty=True, outputEncoding=None))
         subject = TextField(label='Subject', css_class='form-control',
@@ -128,6 +133,7 @@ class EditTranslationForm(Form):
         body = TextArea(label='Email content', rows=10, css_class='form-control',
                         validator=KajikiTemplateValidator())
 
+    validator = UniqueLanguageValidator('model_id', 'language')
     submit = SubmitButton(css_class='btn btn-primary pull-right btn-edit-translation', value=l_('Save'))
 
 

@@ -26,7 +26,7 @@ class TemplateTranslation(DeclarativeBase):
     mail_model_id = Column(Integer, ForeignKey(primary_key(MailModel)))
     mail_model = relation(MailModel, backref=backref('template_translations'))
 
-    language = Column(Unicode(10), unique=True, nullable=False)
+    language = Column(Unicode(10), nullable=False)
 
     subject = Column(String(100))
     body = Column(Text())

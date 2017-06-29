@@ -2,6 +2,8 @@ import formencode
 import kajiki
 from formencode.validators import UnicodeString
 from tg.i18n import ugettext as _
+from tw2.core import ValidationError
+from tw2.core import Validator
 
 from mailtemplates import model
 
@@ -26,10 +28,17 @@ class KajikiTextTemplateValidator(formencode.FancyValidator):
         return value
 
 
-class UniqueLanguageValidator(UnicodeString):
+class UniqueLanguageValidator(Validator):
 
-    def _convert_to_python(self, value, state):
-        __, templates = model.provider.query(model.TemplateTranslation, filters=dict(language=unicode(value)))
+    def __init__(self, mail_model_id_field_name=None, language_field_name=None, **kw):
+        super(UniqueLanguageValidator, self).__init__(**kw)
+        self.mail_model_id = mail_model_id_field_name
+        self.language = language_field_name
+
+    def _validate_python(self, values, state=None):
+        mail_model_id = values.get(self.mail_model_id)
+        language = values.get(self.language)
+        __, templates = model.provider.query(model.TemplateTranslation, filters=dict(mail_model_id=mail_model_id,
+                                                                                     language=unicode(language)))
         if templates:
-            raise formencode.Invalid(_('Template for this language already created.'), value, state)
-        return value
+            raise ValidationError(_('Template for this language already created.'))
