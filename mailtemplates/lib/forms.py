@@ -134,7 +134,7 @@ class EditTranslationForm(Form):
         body = TextArea(label='Email content', rows=10, css_class='form-control',
                         validator=KajikiTemplateValidator())
 
-    validator = UniqueLanguageValidator('model_id', 'language')
+    validator = UniqueLanguageValidator('model_id', 'language', 'translation_id')
     submit = SubmitButton(css_class='btn btn-primary pull-right btn-edit-translation', value=l_('Save'))
 
 
