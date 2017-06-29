@@ -1,0 +1,3 @@
+class MailTemplatesError(Exception):
+    pass
+

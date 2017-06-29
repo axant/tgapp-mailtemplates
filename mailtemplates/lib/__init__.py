@@ -11,12 +11,7 @@ from tgext.mailer import get_mailer, Message
 import kajiki
 
 from mailtemplates import model
-
-
-def format_rich_mail(title, body):
-    params = {'title': title, 'body': Markup(body)}
-    return render_template(params, template_engine='email',
-                           template_name='movieday.templates.email.md_rich_email')
+from mailtemplates.lib.exceptions import MailTemplatesError
 
 
 def send_email(recipients, sender, mail_model_name, translation=None, data=None, subject_data=None, test_mode=False):
@@ -38,9 +33,12 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
         template the variables associated. Instead, the variables were be filled with their names. E.g. If you have a
         variable named ${name} in your template, you'll se in the test mail ${name} in his position.
     """
+    if 'kajiki' not in config['render_functions']:
+        raise MailTemplatesError('Kajiki must be allowed in your app.')
+
     __, mail_models = model.provider.query(model.MailModel, filters=dict(name=mail_model_name))
     if not mail_models:
-        raise Exception("Mail model '%s' not found." % mail_model_name)
+        raise MailTemplatesError("Mail model '%s' not found." % mail_model_name)
     mail_model = mail_models[0]
 
     language = translation or config['_mailtemplates']['default_language']
@@ -48,7 +46,7 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
     __, translations = model.provider.query(model.TemplateTranslation, filters=dict(mail_model=mail_model,
                                                                                     language=language))
     if not translations:
-        raise Exception('Translation for this mail model not found')
+        raise MailTemplatesError('Translation for this mail model not found')
     tr = translations[0]
 
     body = tr.body if not test_mode else tr.body.replace('$', '$$')

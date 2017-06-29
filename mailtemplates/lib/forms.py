@@ -55,9 +55,6 @@ class CreateTranslationForm(Form):
 
     </div>
      <input type="submit" class="btn btn-warning col-md-1 col-md-push-10" formaction="validate_template" value="Validate"></input>
-
-
-
 </div>
 '''
         model_id = HiddenField()
@@ -255,6 +252,7 @@ class TestEmailForm(Form):
 </div>
 '''
         translation_id = HiddenField()
+        language = HiddenField()
         body = HiddenField()
         subject = HiddenField()
         email = TextField(label='Recipient', css_class='form-control',

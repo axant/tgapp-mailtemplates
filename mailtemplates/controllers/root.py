@@ -2,7 +2,9 @@
 """Main Controller"""
 import tg
 from tg import predicates
+import kajiki as kj
 
+from mailtemplates.lib import MailTemplatesError
 from mailtemplates.lib import _send_email
 from tg import TGController
 from tg import config
@@ -93,14 +95,24 @@ class RootController(TGController):
     def test_email(self, **kwargs):
         return dict(form=TestEmailForm, values=kwargs)
 
-    @expose()
+    @expose('kajiki:mailtemplates.templates.new_translation')
+    @expose('genshi:mailtemplates.templates.new_translation')
     @validate(TestEmailForm, error_handler=test_email)
     def send_test_email(self, **kwargs):
-        _send_email(recipients=[kwargs.get('email')], sender=tg.config.get('mail.username', 'no-reply@axantweb.com'),
-                    subject=kwargs.get('subject'), html=kwargs.get('body'))
+        if 'kajiki' not in config['render_functions']:
+            raise MailTemplatesError('Kajiki must be allowed in your app.')
 
+        body = kwargs.get('body').replace('$', '$$')
+        subject = kwargs.get('subject').replace('$', '$$')
+
+        Template = kj.XMLTemplate(body)
+        Template.loader = tg.config['render_functions']['kajiki'].loader
+
+        html = Template().render()
+        _send_email(recipients=[kwargs.get('email')], sender=tg.config.get('mail.username', 'no-reply@axantweb.com'),
+                    subject=subject, html=html)
         tg.flash(_('Test email sent to %s' % kwargs.get('email')))
-        return redirect(url('index'))
+        return dict(form=EditTranslationForm, values=kwargs)
 
     @expose('kajiki:mailtemplates.templates.new_translation')
     @expose('genshi:mailtemplates.templates.new_translation')
