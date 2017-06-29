@@ -42,3 +42,12 @@ class UniqueLanguageValidator(Validator):
                                                                                      language=unicode(language)))
         if templates:
             raise ValidationError(_('Template for this language already created.'))
+
+
+class UniqueModelNameValidator(UnicodeString):
+
+    def _convert_to_python(self, value, state):
+        __, mail_model = model.provider.query(model.MailModel, filters=dict(name=unicode(value)))
+        if mail_model:
+            raise formencode.Invalid(_('Model with this name already created.'), value, state)
+        return value

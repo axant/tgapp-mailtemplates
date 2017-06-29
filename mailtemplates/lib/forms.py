@@ -1,5 +1,6 @@
 from formencode.validators import UnicodeString
-from mailtemplates.lib.validator import KajikiTemplateValidator, KajikiTextTemplateValidator, UniqueLanguageValidator
+from mailtemplates.lib.validator import KajikiTemplateValidator, KajikiTextTemplateValidator, UniqueLanguageValidator, \
+    UniqueModelNameValidator
 from tw2.forms import HiddenField
 from tg.i18n import lazy_ugettext as l_
 import tw2.core as twc
@@ -209,7 +210,7 @@ class NewModelForm(Form):
 </div>
 '''
         name = TextField(label='Model Name', css_class='form-control',
-                         validator=UnicodeString(not_empty=True, outputEncoding=None))
+                         validator=UniqueModelNameValidator(not_empty=True, outputEncoding=None))
         usage = TextArea(label='Description', css_class='form-control',
                          validator=UnicodeString(not_empty=True, outputEncoding=None))
         language = TextField(label='Language', css_class='form-control',
