@@ -221,8 +221,8 @@ class NewModelForm(Form):
     submit = SubmitButton(css_class='btn btn-primary pull-right', value=l_('Create'))
 
 
-class TestEmailForm(Form):
-    action = 'send_test_email'
+class EditDescriptionForm(Form):
+    action = 'update_description'
 
     class child(BaseLayout):
         inline_engine_name = 'kajiki'
@@ -236,9 +236,9 @@ class TestEmailForm(Form):
 
     <div class="form form-horizontal">
         <div class="form-group">
-        <div class="mail-templates-title">Send Test Email</div>
+        <div class="mail-templates-title">Edit model description</div>
             <div class="col-md-12">
-             <div py:with="c=w.children.email"
+             <div py:with="c=w.children.description"
                      class="form-group ${c.error_msg and 'has-error' or ''}">
                     <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
                     <div class="col-md-10">
@@ -251,6 +251,42 @@ class TestEmailForm(Form):
     </div>
 </div>
 '''
+        model_id = HiddenField()
+        description = TextArea(label='Description', css_class='form-control', validator=UnicodeString())
+
+    submit = SubmitButton(css_class='btn btn-primary pull-right', value=l_('Save'))
+
+
+class TestEmailForm(Form):
+    action = 'send_test_email'
+
+    class child(BaseLayout):
+        inline_engine_name = 'kajiki'
+
+        template = '''
+
+    <div py:strip="">
+        <py:for each="c in w.children_hidden">
+            ${c.display()}
+        </py:for>
+
+        <div class="form form-horizontal">
+            <div class="form-group">
+            <div class="mail-templates-title">Send Test Email</div>
+                <div class="col-md-12">
+                 <div py:with="c=w.children.email"
+                         class="form-group ${c.error_msg and 'has-error' or ''}">
+                        <label for="${c.compound_id}" class="col-md-2 control-label">${c.label}</label>
+                        <div class="col-md-10">
+                            ${c.display()}
+                            <span class="help-block" py:content="c.error_msg"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    '''
         translation_id = HiddenField()
         language = HiddenField()
         body = HiddenField()

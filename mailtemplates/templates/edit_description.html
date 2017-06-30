@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<xi:include href="master.html" />
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" py:if="False"/>
+    <title>Welcome to TurboGears pluggable Application</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/_pluggable/mailtemplates/css/style.css')}" />
+</head>
+
+<body>
+    <div class="row padding-bottom50">
+        <div class="col-md-6 col-md-offset-3">
+             <a href="${tg.url('/mailtemplates')}" class="pull-right"> Back to dashboard</a>
+            ${form.display(values)}
+        </div>
+    </div>
+</body>
+</html>

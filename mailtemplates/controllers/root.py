@@ -11,7 +11,8 @@ from tg import config
 from tg import expose, url, redirect, validate
 from tg.decorators import paginate
 from tg.i18n import ugettext as _
-from mailtemplates.lib.forms import CreateTranslationForm, EditTranslationForm, NewModelForm, TestEmailForm
+from mailtemplates.lib.forms import CreateTranslationForm, EditTranslationForm, NewModelForm, TestEmailForm, \
+    EditDescriptionForm
 
 from mailtemplates import model
 
@@ -64,10 +65,11 @@ class RootController(TGController):
         __, translations = model.provider.query(model.TemplateTranslation, filters=dict(_id=kwargs.get('translation_id')))
         if not translations:
             return tg.abort(404)
-        model.provider.update(model.TemplateTranslation, dict(_id=kwargs.get('translation_id'),
-                                                              language=kwargs.get('language'),
-                                                              subject=kwargs.get('subject'),
-                                                              body=kwargs.get('body')), omit_fields=['mail_model'])
+        translation = translations[0]
+        translation.language = kwargs.get('language')
+        translation.subject = kwargs.get('subject')
+        translation.body = kwargs.get('body')
+        model.provider.flush()
         tg.flash(_('Translation edited.'))
         return redirect(url('index'))
 
@@ -113,6 +115,30 @@ class RootController(TGController):
                     subject=subject, html=html)
         tg.flash(_('Test email sent to %s' % kwargs.get('email')))
         return dict(form=EditTranslationForm, values=kwargs)
+
+    @expose('kajiki:mailtemplates.templates.edit_description')
+    @expose('genshi:mailtemplates.templates.edit_description')
+    def edit_description(self, **kwargs):
+        __, mail_models = model.provider.query(model.MailModel, filters=dict(_id=kwargs.get('model_id')))
+        if not mail_models:
+            return tg.abort(404)
+        mail_model = mail_models[0]
+
+        return dict(form=EditDescriptionForm, values={'model_id': kwargs.get('model_id'),
+                                                      'description': mail_model.usage})
+
+    @expose()
+    @validate(EditDescriptionForm, error_handler=edit_description)
+    def update_description(self, **kwargs):
+        __, mail_models = model.provider.query(model.MailModel,filters=dict(_id=kwargs.get('model_id')))
+        if not mail_models:
+            return tg.abort(404)
+        mail_model = mail_models[0]
+        mail_model.usage = kwargs.get('description')
+        model.provider.flush()
+        tg.flash(_('Model description edited.'))
+        return redirect(url('index'))
+
 
     @expose('kajiki:mailtemplates.templates.new_translation')
     @expose('genshi:mailtemplates.templates.new_translation')
