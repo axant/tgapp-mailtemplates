@@ -14,8 +14,8 @@ class MailModel(DeclarativeBase):
     __tablename__ = 'mailtemplates_mail_models'
 
     _id = Column(Integer, autoincrement=True, primary_key=True)
-    name = Column(Unicode(1000), unique=True, nullable=False)
-    usage = Column(Unicode(1000), nullable=False)
+    name = Column(Unicode(500), unique=True, nullable=False)
+    usage = Column(Text(), nullable=False)
 
 
 class TemplateTranslation(DeclarativeBase):
@@ -26,9 +26,9 @@ class TemplateTranslation(DeclarativeBase):
     mail_model_id = Column(Integer, ForeignKey(primary_key(MailModel)))
     mail_model = relation(MailModel, backref=backref('template_translations'))
 
-    language = Column(Unicode(10), nullable=False)
+    language = Column(Unicode(128), nullable=False)
 
-    subject = Column(String(100))
+    subject = Column(Unicode(500))
     body = Column(Text())
 
 
