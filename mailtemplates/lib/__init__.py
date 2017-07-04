@@ -6,6 +6,7 @@ from smtplib import SMTP
 
 import tg
 from markupsafe import Markup
+from tg import app_globals
 from tg import config, request, render_template
 from tgext.mailer import get_mailer, Message
 import kajiki
@@ -14,7 +15,7 @@ from mailtemplates import model
 from mailtemplates.lib.exceptions import MailTemplatesError
 
 
-def send_email(recipients, sender, mail_model_name, translation=None, data=None, subject_data=None, test_mode=False):
+def send_email(recipients, sender, mail_model_name, translation=None, data=None, test_mode=False):
     """
     Method for sending email in this pluggable. Use this method to send your email, specifying the name of a MailModel and
     the language of the email (optionally).
@@ -55,16 +56,13 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
 
     html = Template(data).render()
 
-    if subject_data:
-        Template = kajiki.TextTemplate(tr.subject)
-        subject = Template(subject_data).render()
-    else:
-        subject = tr.subject
+    Template = kajiki.TextTemplate(tr.subject)
+    subject = Template(data).render()
     _send_email(sender, recipients, subject, html)
 
 
 def _send_email(sender, recipients, subject, html):
-    mailer = get_mailer(request)
+    mailer = get_mailer(app_globals)
     message_to_send = Message(
         subject=subject,
         sender=sender,

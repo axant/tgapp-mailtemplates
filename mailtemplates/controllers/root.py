@@ -22,7 +22,6 @@ class RootController(TGController):
 
     @expose('kajiki:mailtemplates.templates.index')
     @expose('genshi:mailtemplates.templates.index')
-    @paginate('mail_models', items_per_page=tg.config.get('pagination.item_per_page', 20))
     def index(self):
         __, mail_models = model.provider.query(model.MailModel, filters=dict())
         return dict(mail_models=mail_models)
