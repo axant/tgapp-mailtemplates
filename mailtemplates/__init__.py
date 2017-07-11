@@ -6,6 +6,8 @@ from tgext.pluggable import plugged
 
 
 def plugme(app_config, options):
+    if not 'default_langauge' in options:
+        options['default_langauge'] = 'EN'
     app_config['_mailtemplates'] = options
 
     from mailtemplates import model

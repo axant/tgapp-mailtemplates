@@ -34,11 +34,11 @@ except IOError:
 setup(
     name='mailtemplates',
     version='0.1.0',
-    description='',
+    description='Email template management for web applications',
     long_description=README,
-    author='',
-    author_email='',
-    #url='',
+    author='Marco Bosio',
+    author_email='marco.bosio@axant.it',
+    url='https://github.com/axant/tgapp-mailtemplates',
     keywords='turbogears2.application',
     packages=find_packages(exclude=['ez_setup']),
     install_requires=install_requires,
@@ -50,7 +50,6 @@ setup(
     ]},
     tests_require=testpkgs,
     extras_require={
-        # Used by Drone.io
         'testing': testpkgs,
     },
     message_extractors={'mailtemplates': [
