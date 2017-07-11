@@ -63,6 +63,8 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
 
 def _send_email(sender, recipients, subject, html):
     mailer = get_mailer(app_globals)
+    if not isinstance(recipients, list):
+        recipients = list(recipients)
     message_to_send = Message(
         subject=subject,
         sender=sender,

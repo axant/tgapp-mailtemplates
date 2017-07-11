@@ -10,7 +10,6 @@ def plugme(app_config, options):
 
     from mailtemplates import model
     milestones.config_ready.register(model.configure_models)
-    milestones.environment_loaded.register(model.configure_provider)
 
     if 'tgext.mailer' not in plugged():
         plug(app_config, 'tgext.mailer')

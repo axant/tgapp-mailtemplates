@@ -32,8 +32,3 @@ def configure_models():
     else:
         raise ValueError('MailTemplates should be used with sqlalchemy or ming')
 
-
-def configure_provider():
-    if tg.config.get('use_sqlalchemy', False):
-        provider.engine = DBSession.bind
-
