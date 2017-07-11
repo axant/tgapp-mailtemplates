@@ -33,7 +33,7 @@ except IOError:
 
 setup(
     name='mailtemplates',
-    version='0.1.0',
+    version='0.1.1',
     description='Email template management for web applications',
     long_description=README,
     author='Marco Bosio',
@@ -55,6 +55,7 @@ setup(
     message_extractors={'mailtemplates': [
             ('**.py', 'python', None),
             ('templates/**.xhtml', 'kajiki', None),
+            ('templates/**.html', 'genshi', None),
             ('public/**', 'ignore', None)
     ]},
     entry_points="""
