@@ -1,4 +1,5 @@
 recursive-include mailtemplates/public *
 recursive-include mailtemplates/templates *.xhtml
+recursive-include mailtemplates/templates *.html
 global-exclude *.pyc
 
