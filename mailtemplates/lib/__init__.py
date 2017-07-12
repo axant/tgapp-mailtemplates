@@ -65,13 +65,19 @@ def _send_email(sender, recipients, subject, html):
     mailer = get_mailer(app_globals)
     if not isinstance(recipients, list):
         recipients = list(recipients)
+
     message_to_send = Message(
         subject=subject,
         sender=sender,
         recipients=recipients,
         html=html
     )
-    if config.get('tm.enabled', False):
-        mailer.send(message_to_send)
-    else:
+
+    try:
+        #     if config.get('tm.enabled', False):
+        #         mailer.send(message_to_send)
+        #     else:
         mailer.send_immediately(message_to_send)
+    except Exception as e:
+
+        raise MailTemplatesError(e)
