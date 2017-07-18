@@ -14,7 +14,7 @@ class MailModel(DeclarativeBase):
     __tablename__ = 'mailtemplates_mail_models'
 
     _id = Column(Integer, autoincrement=True, primary_key=True)
-    name = Column(Unicode(500), unique=True, nullable=False)
+    name = Column(Unicode(128), unique=True, nullable=False)
     usage = Column(Text(), nullable=False)
 
 
