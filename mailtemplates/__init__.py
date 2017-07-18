@@ -16,4 +16,7 @@ def plugme(app_config, options):
     if 'tgext.mailer' not in plugged():
         plug(app_config, 'tgext.mailer')
 
+    if 'tgext.asyncjob' not in plugged():
+        plug(app_config, 'tgext.asyncjob')
+
     return dict(appid='mailtemplates', global_helpers=False)

@@ -14,6 +14,7 @@ install_requires = [
     "sprox >= 0.9.1",
     "tgext.mailer",
     "kajiki",
+    "tgext.asyncjob==0.3.1"
 ]
 
 testpkgs = ['WebTest >= 1.2.3',

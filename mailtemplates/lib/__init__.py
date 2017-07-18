@@ -8,6 +8,7 @@ import tg
 from markupsafe import Markup
 from tg import app_globals
 from tg import config, request, render_template
+from tgext.asyncjob import asyncjob_perform
 from tgext.mailer import get_mailer, Message
 import kajiki
 
@@ -72,11 +73,5 @@ def _send_email(sender, recipients, subject, html):
         recipients=recipients,
         html=html
     )
+    asyncjob_perform(mailer.send_immediately, message=message_to_send)
 
-    try:
-        if config.get('tm.enabled', False):
-            mailer.send(message_to_send)
-        else:
-            mailer.send_immediately(message_to_send)
-    except Exception as e:
-        raise MailTemplatesError(e)
