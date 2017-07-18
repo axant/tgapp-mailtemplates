@@ -74,10 +74,9 @@ def _send_email(sender, recipients, subject, html):
     )
 
     try:
-        #     if config.get('tm.enabled', False):
-        #         mailer.send(message_to_send)
-        #     else:
-        mailer.send_immediately(message_to_send)
+        if config.get('tm.enabled', False):
+            mailer.send(message_to_send)
+        else:
+            mailer.send_immediately(message_to_send)
     except Exception as e:
-
         raise MailTemplatesError(e)

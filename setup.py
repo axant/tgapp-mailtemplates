@@ -5,10 +5,11 @@ try:
     from setuptools import setup, find_packages
 except ImportError:
     from ez_setup import use_setuptools
+
     use_setuptools()
     from setuptools import setup, find_packages
 
-install_requires=[
+install_requires = [
     "tgext.pluggable",
     "sprox >= 0.9.1",
     "tgext.mailer",
@@ -16,15 +17,16 @@ install_requires=[
 ]
 
 testpkgs = ['WebTest >= 1.2.3',
-          'nose',
-          'coverage',
-          'ming',
-          'sqlalchemy',
-          'zope.sqlalchemy',
-          'repoze.who',
-          'tw2.forms',
-          'pyquery',
-            'TurboGears2 >= 2.3.9']
+            'nose',
+            'coverage',
+            'ming',
+            'sqlalchemy',
+            'zope.sqlalchemy',
+            'repoze.who',
+            'tw2.forms',
+            'pyquery',
+            'TurboGears2 >= 2.3.9',
+            ]
 here = os.path.abspath(os.path.dirname(__file__))
 try:
     README = open(os.path.join(here, 'README.rst')).read()
@@ -33,7 +35,7 @@ except IOError:
 
 setup(
     name='mailtemplates',
-    version='0.1.4',
+    version='0.1.5',
     description='Email template management for web applications',
     long_description=README,
     author='Marco Bosio',
@@ -53,10 +55,10 @@ setup(
         'testing': testpkgs,
     },
     message_extractors={'mailtemplates': [
-            ('**.py', 'python', None),
-            ('templates/**.xhtml', 'kajiki', None),
-            ('templates/**.html', 'genshi', None),
-            ('public/**', 'ignore', None)
+        ('**.py', 'python', None),
+        ('templates/**.xhtml', 'kajiki', None),
+        ('templates/**.html', 'genshi', None),
+        ('public/**', 'ignore', None)
     ]},
     entry_points="""
     """,
