@@ -1,4 +1,5 @@
 import bson
+from tgext.asyncjob.queue import AsyncJobQueue
 from webtest import TestApp
 import transaction
 
@@ -32,8 +33,13 @@ class FakeAppPackage(object):
 
         class app_globals(object):
             class Globals():
-                pass
+                asyncjob_queue= AsyncJobQueue()
+
         app_globals = app_globals()
+
+    class websetup(object):
+        def bootstrap(*args, **kwargs):
+            pass
 
 
 class FakeSQLAModel(object):
@@ -140,13 +146,13 @@ def configure_app(using):
     app_cfg.sa_auth.authmetadata = TestAuthMetadata()
     app_cfg['beaker.session.secret'] = app_cfg['session.secret'] = 'SECRET'
     app_cfg.auth_backend = 'ming'
-    app_cfg['mail.debugmailer'] = 'dummy'
 
     if using == 'sqlalchemy':
         app_cfg.package.model = FakeSQLAModel()
         app_cfg.use_sqlalchemy = True
         app_cfg['sqlalchemy.url'] = 'sqlite://'
         app_cfg.use_transaction_manager = True
+        app_cfg.SQLASession = app_cfg.package.model.DBSession
     elif using == 'ming':
         app_cfg.package.model = FakeMingModel()
         app_cfg.use_ming = True
@@ -162,18 +168,22 @@ def configure_app(using):
     # configurations of TGApps. Otherwise the validated
     # form would be different from the displayed one.
 
-    plug(app_cfg, 'tgext.mailer', plug_bootstrap=True, debugmailer='dummy')
-    plug(app_cfg, 'mailtemplates', plug_bootstrap=True, default_language='IT')
+    plug(app_cfg, 'tgext.mailer', plug_bootstrap=True)
+    plug(app_cfg, 'mailtemplates', plug_bootstrap=True, default_language='EN')
+    plug(app_cfg, 'tgext.asyncjob', plug_bootstrap=True)
     return app_cfg
 
 
 def create_app(app_config, auth=False):
-
     app = app_config.make_wsgi_app(skip_authentication=True)
+
     if auth:
-        return TestApp(app, extra_environ=dict(REMOTE_USER='manager'))
+        app = TestApp(app, extra_environ=dict(REMOTE_USER='manager'))
     else:
-        return TestApp(app)
+        app = TestApp(app)
+
+    app.get('/non_existing_url_force_app_config_update', status=404)
+    return app
 
 
 def flush_db_changes():

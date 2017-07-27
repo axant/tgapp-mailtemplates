@@ -1,19 +1,14 @@
 # -*- coding: utf-8 -*-
-from email.header import Header
-from email.mime.text import MIMEText
-from email.utils import parseaddr, formataddr
-from smtplib import SMTP
-
 import tg
-from markupsafe import Markup
 from tg import app_globals
-from tg import config, request, render_template
+from tg import config
 from tgext.asyncjob import asyncjob_perform
 from tgext.mailer import get_mailer, Message
 import kajiki
 
 from mailtemplates import model
 from mailtemplates.lib.exceptions import MailTemplatesError
+from mailtemplates.lib.template_filler import TemplateFiller
 
 
 def send_email(recipients, sender, mail_model_name, translation=None, data=None, test_mode=False):
@@ -51,11 +46,11 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
         raise MailTemplatesError('Translation for this mail model not found')
     tr = translations[0]
 
-    body = tr.body if not test_mode else tr.body.replace('$', '$$')
-    Template = kajiki.XMLTemplate(body)
+    Template = kajiki.XMLTemplate(tr.body)
     Template.loader = tg.config['render_functions']['kajiki'].loader
 
-    html = Template(data).render()
+    html = Template(data)
+    html = html.render()
 
     Template = kajiki.TextTemplate(tr.subject)
     subject = Template(data).render()
@@ -75,3 +70,31 @@ def _send_email(sender, recipients, subject, html):
     )
     asyncjob_perform(mailer.send_immediately, message=message_to_send)
 
+
+def _get_variables_for_template(tmpl):
+    global_vars = []
+    for elem in dir(tmpl):
+        if elem.startswith('_kj_block') or elem == '__main__':
+            global_vars += _get_variables_for_block(tmpl, elem)
+    return global_vars
+
+
+def _get_variables_for_block(tmpl, blockname):
+    no_append = ['len', 'locals']
+    import opcode
+    f = getattr(tmpl, blockname)._func
+    global_vars = []
+    code = f.func_code.co_code
+    code_len = len(code)
+    i = 0
+    while i < code_len:
+        op = ord(code[i])
+        i += 1
+        if op >= opcode.HAVE_ARGUMENT:
+            oparg = ord(code[i]) + ord(code[i + 1]) * 256
+            i += 2
+        if opcode.opname[op] == 'LOAD_GLOBAL':
+            varname = f.func_code.co_names[oparg]
+            if varname not in tmpl.__globals__ and varname not in no_append:
+                global_vars.append(varname)
+    return global_vars

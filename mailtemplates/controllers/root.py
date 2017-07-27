@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Main Controller"""
 import tg
+from mailtemplates.lib import TemplateFiller, _get_variables_for_template
 from tg import predicates
 import kajiki as kj
 
@@ -103,13 +104,16 @@ class RootController(TGController):
         if 'kajiki' not in config['render_functions']:
             raise MailTemplatesError('Kajiki must be allowed in your app.')
 
-        body = kwargs.get('body').replace('$', '$$')
+        body = kwargs.get('body')
         subject = kwargs.get('subject').replace('$', '$$')
 
         Template = kj.XMLTemplate(body)
         Template.loader = tg.config['render_functions']['kajiki'].loader
 
-        html = Template().render()
+        t = Template()
+        for v in _get_variables_for_template(t):
+            t.__globals__[v] = TemplateFiller(v)
+        html = t.render()
         _send_email(recipients=[kwargs.get('email')], sender=tg.config.get('mail.username', 'no-reply@axantweb.com'),
                     subject=subject, html=html)
         tg.flash(_('Test email sent to %s' % kwargs.get('email')))
@@ -153,7 +157,7 @@ class RootController(TGController):
         tg.flash("Email template valid.")
         return dict(form=EditTranslationForm, values=kwargs)
 
-    @expose('kajiki:mailtemplates.templates.')
+    @expose('kajiki:mailtemplates.templates.new_translation')
     @expose('genshi:mailtemplates.templates.new_translation')
     @validate(NewModelForm, error_handler=new_model)
     def validate_template_model(self, **kwargs):

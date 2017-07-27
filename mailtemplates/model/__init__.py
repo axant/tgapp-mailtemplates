@@ -31,4 +31,3 @@ def configure_models():
         provider = MingProvider(DBSession)
     else:
         raise ValueError('MailTemplates should be used with sqlalchemy or ming')
-
