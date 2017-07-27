@@ -35,8 +35,8 @@ except IOError:
     README = ''
 
 setup(
-    name='mailtemplates',
-    version='0.2.0',
+    name='tgapp-mailtemplates',
+    version='0.3.0',
     description='Email template management for web applications',
     long_description=README,
     author='Marco Bosio',
