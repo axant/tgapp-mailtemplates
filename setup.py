@@ -36,7 +36,7 @@ except IOError:
 
 setup(
     name='mailtemplates',
-    version='0.1.7',
+    version='0.2.0',
     description='Email template management for web applications',
     long_description=README,
     author='Marco Bosio',
