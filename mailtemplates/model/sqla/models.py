@@ -1,4 +1,4 @@
-from sqlalchemy import ForeignKey, Column
+from sqlalchemy import ForeignKey, Column, UnicodeText
 from sqlalchemy import String
 from sqlalchemy import Text
 from sqlalchemy.ext.declarative import declarative_base
@@ -15,7 +15,7 @@ class MailModel(DeclarativeBase):
 
     _id = Column(Integer, autoincrement=True, primary_key=True)
     name = Column(Unicode(128), unique=True, nullable=False)
-    usage = Column(Text(), nullable=False)
+    usage = Column(UnicodeText, nullable=False)
 
 
 class TemplateTranslation(DeclarativeBase):
@@ -29,7 +29,7 @@ class TemplateTranslation(DeclarativeBase):
     language = Column(Unicode(128), nullable=False)
 
     subject = Column(Unicode(500))
-    body = Column(Text())
+    body = Column(UnicodeText())
 
 
 
