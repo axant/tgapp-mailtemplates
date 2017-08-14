@@ -8,6 +8,6 @@ python:
   - "3.5"
   - "3.6"
 install:
-    - pip install -e .[testsuite]
+    - pip install -e .[testing]
 script:
     - nosetests -v --tests=tests -d --with-coverage --cover-package=mailtemplates
