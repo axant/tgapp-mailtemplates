@@ -11,7 +11,7 @@ from mailtemplates.lib.exceptions import MailTemplatesError
 from mailtemplates.lib.template_filler import TemplateFiller
 
 
-def send_email(recipients, sender, mail_model_name, translation=None, data=None, test_mode=False):
+def send_email(recipients, sender, mail_model_name, translation=None, data=None, async=True):
     """
     Method for sending email in this pluggable. Use this method to send your email, specifying the name of a MailModel and
     the language of the email (optionally).
@@ -25,10 +25,7 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
     :param translation: The language of a TemplateTranslation (e.g. 'EN'). If omitted, he default language passed as
         Plugin option will be used.
     :param data: A dictionary representing the variables used in the email template, like ${name}
-    :param subject_data:  A dictionary representing the variables used in the email subject, like ${name}
-    :param test_mode: A flag for using this function in test mode. With test mode active, you don't have to pass to the
-        template the variables associated. Instead, the variables were be filled with their names. E.g. If you have a
-        variable named ${name} in your template, you'll se in the test mail ${name} in his position.
+    :param async: The email will sent asynchronously if this flag is true
     """
     if 'kajiki' not in config['render_functions']:
         raise MailTemplatesError('Kajiki must be allowed in your app.')
@@ -54,10 +51,10 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
 
     Template = kajiki.TextTemplate(tr.subject)
     subject = Template(data).render()
-    _send_email(sender, recipients, subject, html)
+    _send_email(sender, recipients, subject, html, async)
 
 
-def _send_email(sender, recipients, subject, html):
+def _send_email(sender, recipients, subject, html, async=True):
     mailer = get_mailer(app_globals)
     if not isinstance(recipients, list):
         recipients = list(recipients)
@@ -68,7 +65,11 @@ def _send_email(sender, recipients, subject, html):
         recipients=recipients,
         html=html
     )
-    asyncjob_perform(mailer.send_immediately, message=message_to_send)
+    if async:
+        asyncjob_perform(mailer.send_immediately, message=message_to_send)
+    else:
+        mailer.send_immediately(message_to_send)
+
 
 
 def _get_variables_for_template(tmpl):
