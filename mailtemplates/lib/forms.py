@@ -252,7 +252,7 @@ class EditDescriptionForm(Form):
 </div>
 '''
         model_id = HiddenField()
-        description = TextArea(label='Description', css_class='form-control', validator=UnicodeString())
+        description = TextArea(label='Description', css_class='form-control')
 
     submit = SubmitButton(css_class='btn btn-primary pull-right', value=l_('Save'))
 
