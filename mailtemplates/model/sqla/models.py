@@ -15,7 +15,7 @@ class MailModel(DeclarativeBase):
 
     _id = Column(Integer, autoincrement=True, primary_key=True)
     name = Column(Unicode(128), unique=True, nullable=False)
-    usage = Column(UnicodeText, nullable=False)
+    usage = Column(UnicodeText(), nullable=False)
 
 
 class TemplateTranslation(DeclarativeBase):
