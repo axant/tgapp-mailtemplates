@@ -47,6 +47,13 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
     Template.loader = tg.config['render_functions']['kajiki'].loader
 
     html = Template(data)
+    real_extend = html._extend
+    def _fake_extend(*args):
+        t = real_extend(*args)
+        t.__kj__.gettext = lambda x: x
+        return t
+    html.__kj__.gettext = lambda x: x
+    html.__kj__.extend = _fake_extend
     html = html.render()
 
     Template = kajiki.TextTemplate(tr.subject)
@@ -55,7 +62,7 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
 
 
 def _send_email(sender, recipients, subject, html, async=True):
-    mailer = get_mailer(app_globals)
+    mailer = get_mailer(None)
     if not isinstance(recipients, list):
         recipients = list(recipients)
 
@@ -69,7 +76,6 @@ def _send_email(sender, recipients, subject, html, async=True):
         asyncjob_perform(mailer.send_immediately, message=message_to_send)
     else:
         mailer.send_immediately(message_to_send)
-
 
 
 def _get_variables_for_template(tmpl):
