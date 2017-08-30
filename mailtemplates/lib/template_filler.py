@@ -32,3 +32,23 @@ class TemplateFiller:
 
     def __call__(self, *args, **kwargs):
         return self.name
+
+
+class FakeCollect(object):
+    def __init__(self, t):
+        self.real_collect = t._collect
+
+    def __call__(self, it):
+        entries = []
+        while True:
+            try:
+                v = next(it)
+            except NameError as e:
+                try:
+                    v = e.args[0].split("'")[1]
+                except:
+                    v = 'undefined'
+            except StopIteration:
+                break
+            entries.append(v)
+        return self.real_collect(iter(entries))

@@ -8,7 +8,7 @@ import kajiki
 
 from mailtemplates import model
 from mailtemplates.lib.exceptions import MailTemplatesError
-from mailtemplates.lib.template_filler import TemplateFiller
+from mailtemplates.lib.template_filler import TemplateFiller, FakeCollect
 
 
 def send_email(recipients, sender, mail_model_name, translation=None, data=None, async=True):

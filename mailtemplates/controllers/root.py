@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Main Controller"""
 import tg
-from mailtemplates.lib import TemplateFiller, _get_variables_for_template
+from mailtemplates.lib import TemplateFiller, _get_variables_for_template, FakeCollect
 from tg import predicates
 import kajiki as kj
 
@@ -111,6 +111,7 @@ class RootController(TGController):
         Template.loader = tg.config['render_functions']['kajiki'].loader
 
         t = Template()
+        t.__kj__.collect = FakeCollect(t)
         for v in _get_variables_for_template(t):
             t.__globals__[v] = TemplateFiller(v)
         html = t.render()
