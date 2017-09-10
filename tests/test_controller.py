@@ -80,7 +80,7 @@ class MailTemplatesControllerTests(object):
         assert d('#language').val() == translation.language, (d('#language').val(), translation.language)
 
     def test_edit_non_existent_translation(self):
-        resp = self.app.get('/mailtemplates/edit_translation', params={'translation_id': 2},
+        resp = self.app.get('/mailtemplates/edit_translation', params={'translation_id': 999},
                             extra_environ={'REMOTE_USER': 'manager'},
                             status=404)
 
