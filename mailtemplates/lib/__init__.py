@@ -11,7 +11,7 @@ from mailtemplates.lib.exceptions import MailTemplatesError
 from mailtemplates.lib.template_filler import TemplateFiller, FakeCollect
 
 
-def send_email(recipients, sender, mail_model_name, translation=None, data=None, async=True):
+def send_email(recipients, sender, mail_model_name, translation=None, data=None, async=True, base_globals=None):
     """
     Method for sending email in this pluggable. Use this method to send your email, specifying the name of a MailModel and
     the language of the email (optionally).
@@ -43,21 +43,17 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
         raise MailTemplatesError('Translation for this mail model not found')
     tr = translations[0]
 
-    Template = kajiki.XMLTemplate(tr.body)
+    values = {} if base_globals is None else base_globals.copy()
+    values.update(data)
+
+    Template = kajiki.XMLTemplate(source=tr.body)
     Template.loader = tg.config['render_functions']['kajiki'].loader
 
-    html = Template(data)
-    real_extend = html._extend
-    def _fake_extend(*args):
-        t = real_extend(*args)
-        t.__kj__.gettext = lambda x: x
-        return t
-    html.__kj__.gettext = lambda x: x
-    html.__kj__.extend = _fake_extend
+    html = Template(values)
     html = html.render()
 
     Template = kajiki.TextTemplate(tr.subject)
-    subject = Template(data).render()
+    subject = Template(values).render()
     _send_email(sender, recipients, subject, html, async)
 
 
