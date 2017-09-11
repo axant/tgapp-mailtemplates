@@ -1,4 +1,4 @@
-class TemplateFiller:
+class TemplateFiller(object):
     def __init__(self, name=None):
         self.name = name
         self.rounds = 0

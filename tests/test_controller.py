@@ -278,8 +278,8 @@ class MailTemplatesControllerTests(object):
 
     def test_template_filler(self):
         t = TemplateFiller(name='name')
-        assert t.prop == 'prop', t.prop
-        assert t['prop'] == 'prop', t['prop']
+        assert str(t.prop) == 'prop', t.prop
+        assert str(t['attr']) == 'attr', t['attr']
 
     def test_kajiki_with_context_with_translator(self):
         with test_context(self.app):

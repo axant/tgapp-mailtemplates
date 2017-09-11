@@ -10,6 +10,8 @@ from mailtemplates import model
 from mailtemplates.lib.exceptions import MailTemplatesError
 from mailtemplates.lib.template_filler import TemplateFiller, FakeCollect
 
+import dis
+
 
 def send_email(recipients, sender, mail_model_name, translation=None, data=None, async=True, base_globals=None):
     """
@@ -82,12 +84,10 @@ def _get_variables_for_template(tmpl):
     return global_vars
 
 
-def _get_variables_for_block(tmpl, blockname):
-    no_append = ['len', 'locals']
+def _get_globals_py2(func):
     import opcode
-    f = getattr(tmpl, blockname)._func
     global_vars = []
-    code = f.func_code.co_code
+    code = func.func_code.co_code
     code_len = len(code)
     i = 0
     while i < code_len:
@@ -97,7 +97,27 @@ def _get_variables_for_block(tmpl, blockname):
             oparg = ord(code[i]) + ord(code[i + 1]) * 256
             i += 2
         if opcode.opname[op] == 'LOAD_GLOBAL':
-            varname = f.func_code.co_names[oparg]
-            if varname not in tmpl.__globals__ and varname not in no_append:
-                global_vars.append(varname)
+            varname = func.func_code.co_names[oparg]
+            yield varname
+
+
+def _get_globals_py3(func):
+    for o in dis.get_instructions(func):
+        if o.opname == 'LOAD_GLOBAL':
+            yield o.argval
+
+
+def _get_variables_for_block(tmpl, blockname):
+    no_append = ['len', 'locals']
+    f = getattr(tmpl, blockname)._func
+    global_vars = []
+
+    if hasattr(dis, 'get_instructions'):
+        get_globals = _get_globals_py3
+    else:
+        get_globals = _get_globals_py2
+
+    for varname in get_globals(f):
+        if varname not in tmpl.__globals__ and varname not in no_append:
+            global_vars.append(varname)
     return global_vars
