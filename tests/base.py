@@ -146,6 +146,7 @@ def configure_app(using):
     app_cfg.sa_auth.authmetadata = TestAuthMetadata()
     app_cfg['beaker.session.secret'] = app_cfg['session.secret'] = 'SECRET'
     app_cfg.auth_backend = 'ming'
+    app_cfg['mail.debugmailer'] = "dummy"
 
     if using == 'sqlalchemy':
         app_cfg.package.model = FakeSQLAModel()
@@ -168,7 +169,7 @@ def configure_app(using):
     # configurations of TGApps. Otherwise the validated
     # form would be different from the displayed one.
 
-    plug(app_cfg, 'tgext.mailer', plug_bootstrap=True)
+    plug(app_cfg, 'tgext.mailer', plug_bootstrap=True, debugmailer='dummy')
     plug(app_cfg, 'mailtemplates', plug_bootstrap=True, default_language='EN')
     plug(app_cfg, 'tgext.asyncjob', plug_bootstrap=True)
     return app_cfg

@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import formencode
 import kajiki
 from formencode.validators import UnicodeString
@@ -12,7 +13,7 @@ class KajikiTemplateValidator(formencode.FancyValidator):
 
     def _convert_to_python(self, value, state):
         try:
-            kajiki.XMLTemplate(unicode(value))
+            kajiki.XMLTemplate(value)
         except:
             raise formencode.Invalid(_('Template not valid.'), value, state)
         return value
@@ -22,7 +23,7 @@ class KajikiTextTemplateValidator(formencode.FancyValidator):
 
     def _convert_to_python(self, value, state):
         try:
-            kajiki.TextTemplate(unicode(value))
+            kajiki.TextTemplate(value)
         except:
             raise formencode.Invalid(_('Template not valid.'), value, state)
         return value
@@ -49,7 +50,7 @@ class UniqueLanguageValidator(Validator):
             template_given = templates_given[0]
 
         __, templates = model.provider.query(model.TemplateTranslation, filters=dict(mail_model_id=mail_model_id,
-                                                                                     language=unicode(language)))
+                                                                                     language=language))
         if templates:
             if not template_given:
                 raise ValidationError(_('Template for this language already created.'))
@@ -60,7 +61,7 @@ class UniqueLanguageValidator(Validator):
 class UniqueModelNameValidator(UnicodeString):
 
     def _convert_to_python(self, value, state):
-        __, mail_model = model.provider.query(model.MailModel, filters=dict(name=unicode(value)))
+        __, mail_model = model.provider.query(model.MailModel, filters=dict(name=value))
         if mail_model:
             raise formencode.Invalid(_('Model with this name already created.'), value, state)
         return value

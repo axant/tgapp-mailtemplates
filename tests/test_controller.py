@@ -24,6 +24,18 @@ class MailTemplatesControllerTests(object):
         m1 = model.provider.create(model.MailModel, dict(name=u'Email', usage=u'Usage'))
         model.provider.create(model.TemplateTranslation, dict(language=u'EN', mail_model=m1, subject=u'Subject',
                                                               body=u'''<div>${body}</div>'''))
+
+        m2 = model.provider.create(model.MailModel, dict(name=u'TranslateEmail', usage=u'Usage'))
+        model.provider.create(model.TemplateTranslation, dict(language=u'IT', mail_model=m2, subject=u'Subject',
+                                                              body=u'''<py:extends href="mailtemplates.templates.md_rich_email_base">
+                                                              <py:block name="a">${mail_title}</py:block>
+                                                              altro testo qui dentro
+                                                              </py:extends>'''))
+        model.provider.create(model.TemplateTranslation, dict(language=u'EN', mail_model=m2, subject=u'soggetto',
+                                                              body=u'''<div><py:block name="a">${mail_title}</py:block>
+                                                              other text
+                                                              </div>'''))
+
         flush_db_changes()
         self.body_formatted = "&lt;div&gt;${body}&lt;/div&gt;"
 
@@ -68,7 +80,7 @@ class MailTemplatesControllerTests(object):
         assert d('#language').val() == translation.language, (d('#language').val(), translation.language)
 
     def test_edit_non_existent_translation(self):
-        resp = self.app.get('/mailtemplates/edit_translation', params={'translation_id': 2},
+        resp = self.app.get('/mailtemplates/edit_translation', params={'translation_id': 999},
                             extra_environ={'REMOTE_USER': 'manager'},
                             status=404)
 
@@ -266,8 +278,47 @@ class MailTemplatesControllerTests(object):
 
     def test_template_filler(self):
         t = TemplateFiller(name='name')
-        assert t.prop == 'prop', t.prop
-        assert t['prop'] == 'prop', t['prop']
+        assert str(t.prop) == 'prop', t.prop
+        assert str(t['attr']) == 'attr', t['attr']
+
+    def test_kajiki_with_context_with_translator(self):
+        with test_context(self.app):
+            __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'TranslateEmail'))
+            mail_model = mail_model[0]
+            send_email(recipients=['marco.bosio@axant.it'], sender='Marco Bosio <mbosioke@gmail.com>', translation='IT',
+                       mail_model_name=mail_model.name, data=dict(body='body', mail_title='titolo mail'), async=False,)
+
+    def test_kajiki_with_context_without_translator(self):
+        with test_context(self.app):
+            __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'TranslateEmail'))
+            mail_model = mail_model[0]
+            send_email(recipients=['marco.bosio@axant.it'], sender='Marco Bosio <mbosioke@gmail.com>', translation='IT',
+                       mail_model_name=mail_model.name, data=dict(body='body', mail_title='titolo mail'), async=False,
+                       base_globals=dict(gettext=lambda x: x))
+
+    def test_kajiki_without_context_with_translator(self):
+        # You can't use i18n.gettext without a context
+        try:
+            __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'TranslateEmail'))
+            mail_model = mail_model[0]
+            send_email(recipients=['marco.bosio@axant.it'], sender='Marco Bosio <mbosioke@gmail.com>', translation='IT',
+                       mail_model_name=mail_model.name, data=dict(body='body', mail_title='titolo mail'), async=False,)
+        except TypeError as e:
+            assert 'name: context' in str(e)
+
+    def test_kajiki_without_context_without_translator(self):
+        __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'TranslateEmail'))
+        mail_model = mail_model[0]
+        send_email(recipients=['marco.bosio@axant.it'], sender='Marco Bosio <mbosioke@gmail.com>', translation='IT',
+                   mail_model_name=mail_model.name, data=dict(body='body', mail_title='titolo mail'), async=False,
+                   base_globals=dict(gettext=lambda x: x))
+
+    def test_kajiki_without_context_with_fake_translator(self):
+        __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'TranslateEmail'))
+        mail_model = mail_model[0]
+        send_email(recipients=['marco.bosio@axant.it'], sender='Marco Bosio <mbosioke@gmail.com>', translation='IT',
+                   mail_model_name=mail_model.name, data=dict(body='body', mail_title='titolo mail'), async=False,
+                   base_globals=dict(gettext=lambda x: "ciao"))
 
 
 class TestMailTemplatesControllerSQLA(MailTemplatesControllerTests):
