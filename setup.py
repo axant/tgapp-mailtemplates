@@ -20,7 +20,7 @@ install_requires = [
 testpkgs = ['WebTest >= 1.2.3',
             'nose',
             'coverage',
-            'ming',
+            'ming == 0.6.1',
             'sqlalchemy',
             'zope.sqlalchemy',
             'repoze.who',

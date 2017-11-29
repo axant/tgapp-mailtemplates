@@ -157,7 +157,7 @@ def configure_app(using):
     elif using == 'ming':
         app_cfg.package.model = FakeMingModel()
         app_cfg.use_ming = True
-        app_cfg['ming.url'] = 'mim:///'
+        app_cfg['ming.url'] = 'mim:///mailtemapltes'
         app_cfg.MingSession = app_cfg.package.model.DBSession
     else:
         raise ValueError('Unsupported backend')
