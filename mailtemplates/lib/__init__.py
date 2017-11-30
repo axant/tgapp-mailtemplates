@@ -13,7 +13,7 @@ from mailtemplates.lib.template_filler import TemplateFiller, FakeCollect
 import dis
 
 
-def send_email(recipients, sender, mail_model_name, translation=None, data=None, async=True, base_globals=None):
+def send_email(recipients, sender, mail_model_name, translation=None, data=None, async=False, base_globals=None):
     """
     Method for sending email in this pluggable. Use this method to send your email, specifying the name of a MailModel and
     the language of the email (optionally).

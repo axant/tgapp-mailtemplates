@@ -240,25 +240,38 @@ class MailTemplatesControllerTests(object):
                                                                               'usage': 'usage'},
                             extra_environ={'REMOTE_USER': 'manager'}, status=200)
 
-    def test_send_email(self):
+    def test_send_email_async(self):
         with test_context(self.app):
             app_globals = tg.app_globals._current_obj()
 
             __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'Email'))
             mail_model = mail_model[0]
             send_email(recipients=['marco.bosio@axant.it'], sender='Marco Bosio <mbosioke@gmail.com>',
-                       mail_model_name=mail_model.name, data=dict(body='body'))
+                       mail_model_name=mail_model.name, data=dict(body='body'), async=True
+                       )
             assert app_globals.asyncjob_queue.queue.qsize() > 0, app_globals.asyncjob_queue.queue.qsize()
+
+    def test_send_email(self):
+        with test_context(self.app):
+            app_globals = tg.app_globals._current_obj()
+            mailer = get_mailer(app_globals)
+
+            __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'Email'))
+            mail_model = mail_model[0]
+            send_email(recipients=['marco.bosio@axant.it'], sender='Marco Bosio <mbosioke@gmail.com>',
+                       mail_model_name=mail_model.name, data=dict(body='body'))
+            assert len(mailer.outbox) > 0, mailer.outbox
 
     def test_send_email_recipients_not_list(self):
         with test_context(self.app):
             app_globals = tg.app_globals._current_obj()
+            mailer = get_mailer(app_globals)
 
             __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'Email'))
             mail_model = mail_model[0]
             send_email(recipients='marco.bosio@axant.it', sender='Marco Bosio <mbosioke@gmail.com>',
                        mail_model_name=mail_model.name, data=dict(body='body'))
-            assert app_globals.asyncjob_queue.queue.qsize() > 0, app_globals.asyncjob_queue.queue.qsize()
+            assert len(mailer.outbox) > 0, mailer.outbox
 
     def test_send_email_no_model(self):
         try:
