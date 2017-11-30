@@ -1,5 +1,5 @@
 .. image:: https://travis-ci.org/axant/tgapp-mailtemplates.svg?branch=master
-:target: https://travis-ci.org/axant/tgapp-mailtemplates
+   :target: https://travis-ci.org/axant/tgapp-mailtemplates
 
 
 About mailtemplates
