@@ -13,7 +13,7 @@ install_requires = [
     "tgext.pluggable",
     "sprox >= 0.9.1",
     "tgext.mailer",
-    "kajiki",
+    "kajiki >= 0.7.1",
     "tgext.asyncjob==0.3.1"
 ]
 
