@@ -22,7 +22,6 @@ class TemplateTranslation(MappedClass):
     class __mongometa__:
         name = 'mailtemplates_template_translations'
         session = DBSession
-        indexes = [()]
 
     _id = FieldProperty(s.ObjectId)
     mail_model_id = ForeignIdProperty('MailModel')

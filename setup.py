@@ -10,7 +10,7 @@ except ImportError:
     from setuptools import setup, find_packages
 
 install_requires = [
-    "tgext.pluggable",
+    "tgext.pluggable >= 0.7.2",
     "sprox >= 0.9.1",
     "tgext.mailer",
     "kajiki >= 0.7.1",

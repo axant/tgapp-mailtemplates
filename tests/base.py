@@ -170,8 +170,10 @@ def configure_app(using):
     # form would be different from the displayed one.
 
     plug(app_cfg, 'tgext.mailer', plug_bootstrap=True, debugmailer='dummy')
-    plug(app_cfg, 'mailtemplates', plug_bootstrap=True, default_language='EN')
     plug(app_cfg, 'tgext.asyncjob', plug_bootstrap=True)
+    # it is important that tgext.mailer and tgext.asyncjob are plugged
+    # before mailtemplates or not plugged at all as mailtemplates plugs them
+    plug(app_cfg, 'mailtemplates', plug_bootstrap=True, default_language='EN')
     return app_cfg
 
 
