@@ -37,7 +37,7 @@ except IOError:
 
 setup(
     name='tgapp-mailtemplates',
-    version='0.13.0',
+    version='0.13.1',
     description='Email template management for web applications',
     long_description=README,
     author='Marco Bosio',
@@ -56,7 +56,7 @@ setup(
     extras_require={
         'testing': testpkgs,
         'asyncjob': ['tgext.asyncjob == 0.3.1'],
-        'celery': ['tgext.celery >= 0.0.2']
+        'celery': ['tgext.celery >= 0.0.3']
     },
     message_extractors={'mailtemplates': [
         ('**.py', 'python', None),
