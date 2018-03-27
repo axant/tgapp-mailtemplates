@@ -2,7 +2,6 @@
 import tg
 from tg import app_globals
 from tg import config
-from tgext.asyncjob import asyncjob_perform
 from tgext.mailer import get_mailer, Message
 import kajiki
 
@@ -13,21 +12,20 @@ from mailtemplates.lib.template_filler import TemplateFiller, FakeCollect
 import dis
 
 
-def send_email(recipients, sender, mail_model_name, translation=None, data=None, async=False, base_globals=None):
+def send_email(recipients, sender, mail_model_name, translation=None, data=None, async=False):
     """
-    Method for sending email in this pluggable. Use this method to send your email, specifying the name of a MailModel and
-    the language of the email (optionally).
+    Method for sending email in this pluggable. Use this method to send your email, specifying
+    the name of a MailModel and the language of the email (optionally).
     E.g. send_email('to_addr@example.com', 'no_reply@example.com', 'registration_mail', 'EN')
     If a language is not specified, the default language passed as Plugin option will be used.
 
-
-    :param recipients: An array representing the email addresss of the recipient of the email
-    :param sender: A string representing the email address of the sendere of the email
+    :param recipients: An array representing the email address of the recipient of the email
+    :param sender: A string representing the email adress of the sender of the email
     :param mail_model_name: The name of the MailModel representing an email
-    :param translation: The language of a TemplateTranslation (e.g. 'EN'). If omitted, he default language passed as
-        Plugin option will be used.
+    :param translation: The language of a TemplateTranslation (e.g. 'EN'). If omitted, the
+        default language provided while plugging mailtemplates is used
     :param data: A dictionary representing the variables used in the email template, like ${name}
-    :param async: The email will sent asynchronously if this flag is true
+    :param async: The email will sent asynchronously if this flag is True
     """
     if 'kajiki' not in config['render_functions']:
         raise MailTemplatesError('Kajiki must be allowed in your app.')
@@ -39,41 +37,49 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
 
     language = translation or config['_mailtemplates']['default_language']
 
-    __, translations = model.provider.query(model.TemplateTranslation, filters=dict(mail_model=mail_model,
-                                                                                    language=language))
+    __, translations = model.provider.query(
+        model.TemplateTranslation,
+        filters=dict(mail_model=mail_model, language=language)
+    )
     if not translations:
         raise MailTemplatesError('Translation for this mail model not found')
     tr = translations[0]
 
-    values = {} if base_globals is None else base_globals.copy()
-    values.update(data)
+    # as the template is already translated, use a fake gettext
+    data.update({'gettext': lambda x: x})
 
     Template = kajiki.XMLTemplate(source=tr.body)
     Template.loader = tg.config['render_functions']['kajiki'].loader
-
-    html = Template(values)
-    html = html.render()
+    html = Template(data).render()
 
     Template = kajiki.TextTemplate(tr.subject)
-    subject = Template(values).render()
+    subject = Template(data).render()
+
     _send_email(sender, recipients, subject, html, async)
 
 
+def _get_request():
+    """Tests fails and can't mock get_mailer, so mock this"""
+    return tg.request
+
+
 def _send_email(sender, recipients, subject, html, async=True):
-    mailer = get_mailer(None)
     if not isinstance(recipients, list):
         recipients = list(recipients)
 
-    message_to_send = Message(
-        subject=subject,
-        sender=sender,
-        recipients=recipients,
-        html=html
-    )
-    if async:
-        asyncjob_perform(mailer.send_immediately, message=message_to_send)
+    if async and config['_mailtemplates']['async_sender'] == 'tgext.celery':
+        from mailtemplates.lib.celery_tasks import mailtemplates_async_send_email
+        mailtemplates_async_send_email.delay(subject=subject, sender=sender,
+                                             recipients=recipients, html=html)
+    elif async and config['_mailtemplates']['async_sender'] == 'tgext.asyncjob':
+        from tgext.asyncjob import asyncjob_perform
+        mailer = get_mailer(None)
+        message = Message(subject=subject, sender=sender, recipients=recipients, html=html)
+        asyncjob_perform(mailer.send_immediately, message=message)
     else:
-        mailer.send_immediately(message_to_send)
+        mailer = get_mailer(_get_request())
+        message = Message(subject=subject, sender=sender, recipients=recipients, html=html)
+        mailer.send_immediately(message)
 
 
 def _get_variables_for_template(tmpl):

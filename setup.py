@@ -14,12 +14,12 @@ install_requires = [
     "sprox >= 0.9.1",
     "tgext.mailer",
     "kajiki >= 0.7.1",
-    "tgext.asyncjob==0.3.1"
 ]
 
 testpkgs = ['WebTest >= 1.2.3',
             'nose',
             'coverage',
+            'mock',
             'ming == 0.6.1',
             'sqlalchemy',
             'zope.sqlalchemy',
@@ -27,6 +27,7 @@ testpkgs = ['WebTest >= 1.2.3',
             'tw2.forms',
             'pyquery',
             'TurboGears2 >= 2.3.9',
+            'tgext.asyncjob == 0.3.1',
             ]
 here = os.path.abspath(os.path.dirname(__file__))
 try:
@@ -36,7 +37,7 @@ except IOError:
 
 setup(
     name='tgapp-mailtemplates',
-    version='0.12.0',
+    version='0.13.0',
     description='Email template management for web applications',
     long_description=README,
     author='Marco Bosio',
@@ -54,6 +55,8 @@ setup(
     tests_require=testpkgs,
     extras_require={
         'testing': testpkgs,
+        'asyncjob': ['tgext.asyncjob == 0.3.1'],
+        'celery': ['tgext.celery >= 0.0.2']
     },
     message_extractors={'mailtemplates': [
         ('**.py', 'python', None),

@@ -13,6 +13,7 @@ from mailtemplates import model
 from pyquery import PyQuery as pq
 from .base import configure_app, create_app, flush_db_changes
 import re
+import mock
 
 find_urls = re.compile('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
 
@@ -251,7 +252,8 @@ class MailTemplatesControllerTests(object):
                        )
             assert app_globals.asyncjob_queue.queue.qsize() > 0, app_globals.asyncjob_queue.queue.qsize()
 
-    def test_send_email(self):
+    @mock.patch('mailtemplates.lib._get_request', return_value=None)
+    def test_send_email(self, _):
         with test_context(self.app):
             app_globals = tg.app_globals._current_obj()
             mailer = get_mailer(app_globals)
@@ -262,7 +264,8 @@ class MailTemplatesControllerTests(object):
                        mail_model_name=mail_model.name, data=dict(body='body'))
             assert len(mailer.outbox) > 0, mailer.outbox
 
-    def test_send_email_recipients_not_list(self):
+    @mock.patch('mailtemplates.lib._get_request', return_value=None)
+    def test_send_email_recipients_not_list(self, _):
         with test_context(self.app):
             app_globals = tg.app_globals._current_obj()
             mailer = get_mailer(app_globals)
@@ -294,44 +297,31 @@ class MailTemplatesControllerTests(object):
         assert str(t.prop) == 'prop', t.prop
         assert str(t['attr']) == 'attr', t['attr']
 
-    def test_kajiki_with_context_with_translator(self):
+    @mock.patch('mailtemplates.lib._get_request', return_value=None)
+    def test_kajiki_with_context(self, _):
         with test_context(self.app):
-            __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'TranslateEmail'))
-            mail_model = mail_model[0]
-            send_email(recipients=['marco.bosio@axant.it'], sender='Marco Bosio <mbosioke@gmail.com>', translation='IT',
-                       mail_model_name=mail_model.name, data=dict(body='body', mail_title='titolo mail'), async=False,)
+            send_email(
+                recipients=['marco.bosio@axant.it'],
+                sender='Marco Bosio <mbosioke@gmail.com>',
+                translation='IT',
+                mail_model_name=u'TranslateEmail',
+                data=dict(body='body', mail_title='titolo mail'),
+                async=False,
+            )
 
-    def test_kajiki_with_context_without_translator(self):
+    def test_kajiki_with_context_async(self):
+        # tgext.asyncjob can't start an asyncjob without a context.
         with test_context(self.app):
-            __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'TranslateEmail'))
-            mail_model = mail_model[0]
-            send_email(recipients=['marco.bosio@axant.it'], sender='Marco Bosio <mbosioke@gmail.com>', translation='IT',
-                       mail_model_name=mail_model.name, data=dict(body='body', mail_title='titolo mail'), async=False,
-                       base_globals=dict(gettext=lambda x: x))
+            send_email(
+                recipients=['marco.bosio@axant.it'],
+                sender='Marco Bosio <mbosioke@gmail.com>',
+                translation='IT',
+                mail_model_name=u'TranslateEmail',
+                data=dict(body='body', mail_title='titolo mail'),
+                async=True
+            )
 
-    def test_kajiki_without_context_with_translator(self):
-        # You can't use i18n.gettext without a context
-        try:
-            __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'TranslateEmail'))
-            mail_model = mail_model[0]
-            send_email(recipients=['marco.bosio@axant.it'], sender='Marco Bosio <mbosioke@gmail.com>', translation='IT',
-                       mail_model_name=mail_model.name, data=dict(body='body', mail_title='titolo mail'), async=False,)
-        except TypeError as e:
-            assert 'name: context' in str(e)
-
-    def test_kajiki_without_context_without_translator(self):
-        __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'TranslateEmail'))
-        mail_model = mail_model[0]
-        send_email(recipients=['marco.bosio@axant.it'], sender='Marco Bosio <mbosioke@gmail.com>', translation='IT',
-                   mail_model_name=mail_model.name, data=dict(body='body', mail_title='titolo mail'), async=False,
-                   base_globals=dict(gettext=lambda x: x))
-
-    def test_kajiki_without_context_with_fake_translator(self):
-        __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'TranslateEmail'))
-        mail_model = mail_model[0]
-        send_email(recipients=['marco.bosio@axant.it'], sender='Marco Bosio <mbosioke@gmail.com>', translation='IT',
-                   mail_model_name=mail_model.name, data=dict(body='body', mail_title='titolo mail'), async=False,
-                   base_globals=dict(gettext=lambda x: "ciao"))
+    # TODO: test tgext.celery integration:
 
 
 class TestMailTemplatesControllerSQLA(MailTemplatesControllerTests):

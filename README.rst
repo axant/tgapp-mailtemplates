@@ -7,14 +7,25 @@ About mailtemplates
 
 mailtemplates is a Pluggable application for TurboGears2.
 
+mailtemplates provides a dashboard meant for managers of your website (whoever has the ``mailtemplates`` permission) allowing them to customize the templates of the email that are sent from your application.
+
+the templates are stored in a database and both ``sqlalchemy`` and ``ming`` are supported.
+
+kajiki is the template engine used.
+
 Installing
 -------------------------------
 
-mailtemplates can be installed both from pypi or from bitbucket::
+mailtemplates can work with ``tgext.asyncjob`` or ``tgext.asyncjob``
+you can choose by installing with the right bundle::
 
-    pip install mailtemplates
+    pip install "mailtemplates[asyncjob]"
 
-should just work for most of the users
+or::
+
+    pip install "mailtemplates[celery]"
+
+if you just want to send emails in a syncronous context then install the base package and plug with ``async_sender`` set to ``None``
 
 Plugging mailtemplates
 ----------------------------
@@ -33,25 +44,47 @@ For configure your default language for email templates, add the ISO 3166-2 code
 
 If not specified, 'EN' will be the default language for you app.
 
+If you intend to use tgext.celery then plug and configure it **before** plugging mailtemplates with ``async_sender`` option::
+
+    plug(base_config, 'mailtemplates', async_sender='tgext.celery')
+
+and in your ``.ini`` file add under ``celery.CELERY_INCLUDE`` ``mailtemplates.lib.celery_tasks``::
+
+    celery.CELERY_INCLUDE = myapp.lib.celery.tasks mailtemplates.lib.celery_tasks
+
+
 You will be able to access the plugged application at
 *http://localhost:8080/mailtemplates*.
 
-Available Hooks
-----------------------
-mailtemplates makes available a some hooks which will be
-called during some actions to alter the default
-behavior of the appplications:
+Sending emails
+--------------
 
-Exposed Partials
-----------------------
+access to the dashboard and create a mail model, then you can use::
 
-mailtemplates exposes a bunch of partials which can be used
-to render pieces of the blogging system anywhere in your
-application:
+    from mailtemplates.lib import send_email
+    send_email(
+      recipients=['address@example.com'],
+      sender=config.get('mail.username'),
+      mail_model_name='test',
+      data=dict(test='test string'),
+      async=True,
+    )
 
-Exposed Templates
---------------------
+in your controllers to actually send the email.
 
-The templates used by registration and that can be replaced with
-*tgext.pluggable.replace_template* are:
+details of params of ``send_email``
 
+- recipients: An array representing the email address of the recipient of the email
+- sender: A string representing the email address of the sender of the email
+- mail_model_name: The name of the MailModel representing an email
+- translation: The language of a TemplateTranslation (e.g. 'EN'). If omitted, the
+  default language provided while plugging mailtemplates is used
+- data: A dictionary representing the variables used in the email template, like ${name}
+- async: The email will sent asynchronously if this flag is True
+
+Note on async
+-------------
+
+if you are already in an asyncronous context then you can't use tgext.asyncjob with async=True,
+but you're already in an asyncronous context, so you can just use async=False.
+If you really need to send email asynchronously from an already asyncronous context, then use tgext.celery
