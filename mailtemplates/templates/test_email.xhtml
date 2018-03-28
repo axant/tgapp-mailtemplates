@@ -1,7 +1,6 @@
 <html py:extends="master.xhtml" py:strip="True">
 <head py:block="head" py:strip="True">
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" py:if="False"/>
-    <title py:block="master_title">Welcome to TurboGears pluggable Application</title>
     <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/_pluggable/mailtemplates/css/style.css')}" />
 </head>
 
@@ -11,7 +10,8 @@
 
     <div class="row">
          <div class="col-md-6 col-md-offset-3">
-             <a href="${tg.url('/mailtemplates')}" class="pull-right"> Back to dashboard</a>
+             <a href="${tg.url('/mailtemplates')}" class="pull-right mail-templates-back"> Back to dashboard</a>
+             <div class="clearfix"></div>
             ${form.display(values)}
         </div>
     </div>
