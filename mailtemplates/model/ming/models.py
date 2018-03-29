@@ -10,7 +10,7 @@ class MailModel(MappedClass):
     class __mongometa__:
         name = 'mailtemplates_mail_models'
         session = DBSession
-        indexes = [('name',)]
+        unique_indexes = [('name',)]
 
     _id = FieldProperty(s.ObjectId)
     name = FieldProperty(s.String, required=True)
@@ -29,4 +29,3 @@ class TemplateTranslation(MappedClass):
     language = FieldProperty(s.String, required=True)
     subject = FieldProperty(s.String)
     body = FieldProperty(s.String)
-

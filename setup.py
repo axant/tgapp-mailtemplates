@@ -37,7 +37,7 @@ except IOError:
 
 setup(
     name='tgapp-mailtemplates',
-    version='0.13.2',
+    version='0.13.3',
     description='Email template management for web applications',
     long_description=README,
     author='Marco Bosio',

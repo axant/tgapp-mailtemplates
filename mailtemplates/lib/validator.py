@@ -9,12 +9,22 @@ from tw2.core import Validator
 from mailtemplates import model
 
 
+def _to_object_id(string):
+    try:
+        from bson import ObjectId
+        from bson.errors import InvalidId
+        return ObjectId(string)
+    except (InvalidId, ImportError):
+        return string
+
+
 class KajikiTemplateValidator(formencode.FancyValidator):
 
     def _convert_to_python(self, value, state):
         try:
             kajiki.XMLTemplate(value)
-        except:
+        except Exception as e:
+            print(e)
             raise formencode.Invalid(_('Template not valid.'), value, state)
         return value
 
@@ -44,13 +54,17 @@ class UniqueLanguageValidator(Validator):
         template_given = None
         if self.translation_id:  # edit_mode
             translation_id = values.get(self.translation_id)
-            __, templates_given = model.provider.query(model.TemplateTranslation, filters=dict(_id=translation_id))
+            __, templates_given = model.provider.query(model.TemplateTranslation,
+                                                       filters=dict(_id=translation_id))
             if not templates_given:
                 return
             template_given = templates_given[0]
 
-        __, templates = model.provider.query(model.TemplateTranslation, filters=dict(mail_model_id=mail_model_id,
-                                                                                     language=language))
+        __, templates = model.provider.query(
+            model.TemplateTranslation,
+            filters=dict(mail_model_id=_to_object_id(mail_model_id),
+                         language=language)
+        )
         if templates:
             if not template_given:
                 raise ValidationError(_('Template for this language already created.'))
