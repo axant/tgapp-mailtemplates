@@ -16,7 +16,7 @@ install_requires = [
     "kajiki >= 0.7.1",
 ]
 
-testpkgs = ['WebTest >= 1.2.3',
+testpkgs = ['WebTest>=1.2.3,<2.0',
             'nose',
             'coverage',
             'mock',
