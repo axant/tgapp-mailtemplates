@@ -10,4 +10,4 @@ install:
     - pip install --upgrade setuptools
     - pip install -e .[testing]
 script:
-    - nosetests -v --tests=tests -d --with-coverage --cover-package=mailtemplates
+    - nosetests -v 
