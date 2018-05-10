@@ -10,8 +10,9 @@
 
 .card-table pre {
     position: relative;
-    overflow: scroll;
+    overflow-y: scroll;
     height: 200px;
+    white-space: pre-wrap;
 }
 
 .panel-model .panel-heading{
