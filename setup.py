@@ -14,10 +14,10 @@ install_requires = [
     "sprox >= 0.9.1",
     "tgext.mailer",
     "kajiki >= 0.7.1",
+    "TurboGears2 >= 2.3.9",
 ]
 
 testpkgs = ['WebTest>=1.2.3',
-            'WebOb<1.8',
             'nose',
             'coverage',
             'mock',
@@ -27,9 +27,7 @@ testpkgs = ['WebTest>=1.2.3',
             'repoze.who',
             'tw2.forms',
             'pyquery',
-            'TurboGears2 >= 2.3.9',
-            'tgext.asyncjob == 0.3.1',
-            ]
+            'tgext.asyncjob == 0.3.1']
 here = os.path.abspath(os.path.dirname(__file__))
 try:
     README = open(os.path.join(here, 'README.rst')).read()
