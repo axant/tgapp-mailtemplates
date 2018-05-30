@@ -36,11 +36,11 @@ except IOError:
 
 setup(
     name='tgapp-mailtemplates',
-    version='0.13.3',
+    version='0.13.4',
     description='Email template management for web applications',
     long_description=README,
-    author='Marco Bosio',
-    author_email='marco.bosio@axant.it',
+    author='Mouaad Daki',
+    author_email='mouaad.daki@axant.it',
     url='https://github.com/axant/tgapp-mailtemplates',
     keywords='turbogears2.application',
     packages=find_packages(exclude=['ez_setup']),
