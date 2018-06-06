@@ -5,7 +5,7 @@ from formencode.validators import UnicodeString
 from tg.i18n import ugettext as _
 from tw2.core import ValidationError
 from tw2.core import Validator
-
+import tg
 from mailtemplates import model
 
 
@@ -59,10 +59,11 @@ class UniqueLanguageValidator(Validator):
             if not templates_given:
                 return
             template_given = templates_given[0]
-
+            
+        mail_model_id = _to_object_id(mail_model_id) if tg.config.get("use_ming", False) else mail_model_id    
         __, templates = model.provider.query(
             model.TemplateTranslation,
-            filters=dict(mail_model_id=_to_object_id(mail_model_id),
+            filters=dict(mail_model_id=mail_model_id,
                          language=language)
         )
         if templates:
