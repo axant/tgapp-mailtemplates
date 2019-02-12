@@ -11,7 +11,15 @@ def plugme(app_config, options):
         options['default_language'] = 'EN'
     if 'async_sender' not in options:
         options.update({'async_sender': 'tgext.asyncjob'})
-    app_config['_mailtemplates'] = options
+
+    try:
+        # TG2.3
+        app_config['_mailtemplates'] = options
+    except TypeError:
+        # TG2.4
+        app_config.update_blueprint({
+            '_mailtemplates': options
+        })
 
     from mailtemplates import model
     milestones.config_ready.register(model.configure_models)

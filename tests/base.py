@@ -1,4 +1,3 @@
-import bson
 from tgext.asyncjob.queue import AsyncJobQueue
 from webtest import TestApp
 import transaction
@@ -99,7 +98,7 @@ class FakeMingModel(object):
             self.ming_session.ensure_indexes(mapper.collection)
 
 
-class FakeUser(bson.ObjectId):
+class FakeUser(object):
     """
     Fake user that emulates an users without the need to actually
     query it from the database
@@ -143,6 +142,7 @@ def configure_app(using):
     app_cfg.use_dotted_templatenames = True
     app_cfg.package = FakeAppPackage()
     app_cfg.use_toscawidgets2 = True
+    app_cfg['tw2.enabled'] = True
     app_cfg.sa_auth.authmetadata = TestAuthMetadata()
     app_cfg['beaker.session.secret'] = app_cfg['session.secret'] = 'SECRET'
     app_cfg.auth_backend = 'ming'
@@ -153,6 +153,7 @@ def configure_app(using):
         app_cfg.use_sqlalchemy = True
         app_cfg['sqlalchemy.url'] = 'sqlite://'
         app_cfg.use_transaction_manager = True
+        app_cfg['tm.enabled'] = True
         app_cfg.SQLASession = app_cfg.package.model.DBSession
     elif using == 'ming':
         app_cfg.package.model = FakeMingModel()
