@@ -33,6 +33,9 @@ class TemplateFiller(object):
     def __call__(self, *args, **kwargs):
         return self.name
 
+    def __len__(self):
+        return 2
+
 
 class FakeCollect(object):
     def __init__(self, t):
