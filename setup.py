@@ -21,13 +21,13 @@ testpkgs = ['WebTest>=1.2.3',
             'nose',
             'coverage',
             'mock',
-            'ming == 0.6.1',
+            'ming',
             'sqlalchemy',
             'zope.sqlalchemy',
             'repoze.who',
             'tw2.forms',
             'pyquery',
-            'tgext.asyncjob == 0.3.1']
+            'tgext.asyncjob']
 here = os.path.abspath(os.path.dirname(__file__))
 try:
     README = open(os.path.join(here, 'README.rst')).read()
