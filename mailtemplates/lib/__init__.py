@@ -12,7 +12,7 @@ from mailtemplates.lib.template_filler import TemplateFiller, FakeCollect
 import dis
 
 
-def send_email(recipients, sender, mail_model_name, translation=None, data=None, async=False):
+def send_email(recipients, sender, mail_model_name, translation=None, data=None, send_async=False):
     """
     Method for sending email in this pluggable. Use this method to send your email, specifying
     the name of a MailModel and the language of the email (optionally).
@@ -25,7 +25,7 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
     :param translation: The language of a TemplateTranslation (e.g. 'EN'). If omitted, the
         default language provided while plugging mailtemplates is used
     :param data: A dictionary representing the variables used in the email template, like ${name}
-    :param async: The email will sent asynchronously if this flag is True
+    :param send_async: The email will sent asynchronously if this flag is True
     """
     if 'kajiki' not in config['render_functions']:
         raise MailTemplatesError('Kajiki must be allowed in your app.')
@@ -55,7 +55,7 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
     Template = kajiki.TextTemplate(tr.subject)
     subject = Template(data).render()
 
-    _send_email(sender, recipients, subject, html, async)
+    _send_email(sender, recipients, subject, html, send_async)
 
 
 def _get_request():
@@ -63,15 +63,15 @@ def _get_request():
     return tg.request
 
 
-def _send_email(sender, recipients, subject, html, async=True):
+def _send_email(sender, recipients, subject, html, send_async=True):
     if not isinstance(recipients, list):
         recipients = list(recipients)
 
-    if async and config['_mailtemplates']['async_sender'] == 'tgext.celery':
+    if send_async and config['_mailtemplates']['async_sender'] == 'tgext.celery':
         from mailtemplates.lib.celery_tasks import mailtemplates_async_send_email
         mailtemplates_async_send_email.delay(subject=subject, sender=sender,
                                              recipients=recipients, html=html)
-    elif async and config['_mailtemplates']['async_sender'] == 'tgext.asyncjob':
+    elif send_async and config['_mailtemplates']['async_sender'] == 'tgext.asyncjob':
         from tgext.asyncjob import asyncjob_perform
         mailer = get_mailer(None)
         message = Message(subject=subject, sender=sender, recipients=recipients, html=html)

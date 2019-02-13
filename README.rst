@@ -67,7 +67,7 @@ access to the dashboard and create a mail model, then you can use::
       sender=config.get('mail.username'),
       mail_model_name='test',
       data=dict(test='test string'),
-      async=True,
+      send_async=True,
     )
 
 in your controllers to actually send the email.
@@ -80,11 +80,11 @@ details of params of ``send_email``
 - translation: The language of a TemplateTranslation (e.g. 'EN'). If omitted, the
   default language provided while plugging mailtemplates is used
 - data: A dictionary representing the variables used in the email template, like ${name}
-- async: The email will sent asynchronously if this flag is True
+- send_async: The email will sent asynchronously if this flag is True
 
-Note on async
+Note on send_async
 -------------
 
-if you are already in an asyncronous context then you can't use tgext.asyncjob with async=True,
-but you're already in an asyncronous context, so you can just use async=False.
+if you are already in an asyncronous context then you can't use tgext.asyncjob with send_async=True,
+but you're already in an asyncronous context, so you can just use send_async=False.
 If you really need to send email asynchronously from an already asyncronous context, then use tgext.celery

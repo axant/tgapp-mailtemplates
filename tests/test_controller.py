@@ -248,7 +248,7 @@ class MailTemplatesControllerTests(object):
             __, mail_model = model.provider.query(model.MailModel, filters=dict(name=u'Email'))
             mail_model = mail_model[0]
             send_email(recipients=['marco.bosio@axant.it'], sender='Marco Bosio <mbosioke@gmail.com>',
-                       mail_model_name=mail_model.name, data=dict(body='body'), async=True
+                       mail_model_name=mail_model.name, data=dict(body='body'), send_async=True
                        )
             assert app_globals.asyncjob_queue.queue.qsize() > 0, app_globals.asyncjob_queue.queue.qsize()
 
@@ -306,7 +306,7 @@ class MailTemplatesControllerTests(object):
                 translation='IT',
                 mail_model_name=u'TranslateEmail',
                 data=dict(body='body', mail_title='titolo mail'),
-                async=False,
+              send_async=False,
             )
 
     def test_kajiki_with_context_async(self):
@@ -318,7 +318,7 @@ class MailTemplatesControllerTests(object):
                 translation='IT',
                 mail_model_name=u'TranslateEmail',
                 data=dict(body='body', mail_title='titolo mail'),
-                async=True
+              send_async=True
             )
 
     # TODO: test tgext.celery integration:
