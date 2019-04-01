@@ -9,7 +9,12 @@ from mailtemplates import model
 from mailtemplates.lib.exceptions import MailTemplatesError
 from mailtemplates.lib.template_filler import TemplateFiller, FakeCollect
 
+import logging
+
 import dis
+
+
+log = logging.getLogger(__name__)
 
 
 def send_email(recipients, sender, mail_model_name, translation=None, data=None, send_async=False):
@@ -59,9 +64,12 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
 
 
 def _get_request():
-    """Tests fails and can't mock get_mailer, so mock this"""
+    """You can mock this helper in order to unit-test not-async mails
+    @patch('mailtemplates.lib._get_request', Mock(return_value=None))
+    You should do this because in tests you do not have anymore the request,
+    using global mailer in tests is good enough.
+    """
     return tg.request
-
 
 def _send_email(sender, recipients, subject, html, send_async=True):
     if not isinstance(recipients, list):
@@ -77,7 +85,12 @@ def _send_email(sender, recipients, subject, html, send_async=True):
         message = Message(subject=subject, sender=sender, recipients=recipients, html=html)
         asyncjob_perform(mailer.send_immediately, message=message)
     else:
-        mailer = get_mailer(_get_request())
+        try:
+            mailer = get_mailer(_get_request())
+            log.debug('using request mailer')
+        except AttributeError:
+            log.debug('using global mailer in not-async context')
+            mailer = get_mailer(None)
         message = Message(subject=subject, sender=sender, recipients=recipients, html=html)
         mailer.send_immediately(message)
 

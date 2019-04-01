@@ -14,7 +14,7 @@ install_requires = [
     "sprox >= 0.9.1",
     "tgext.mailer",
     "kajiki >= 0.7.1",
-    "TurboGears2 >= 2.3.9",
+    "TurboGears2 >= 2.3.8",
 ]
 
 testpkgs = ['WebTest>=1.2.3',
@@ -36,7 +36,7 @@ except IOError:
 
 setup(
     name='tgapp-mailtemplates',
-    version='0.13.6',
+    version='0.13.7',
     description='Email template management for web applications',
     long_description=README,
     author='Marco Bosio',
