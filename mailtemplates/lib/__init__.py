@@ -17,7 +17,15 @@ import dis
 log = logging.getLogger(__name__)
 
 
-def send_email(recipients, sender, mail_model_name, translation=None, data=None, send_async=False):
+def send_email(
+    recipients, 
+    sender, 
+    mail_model_name,
+    cc=None,
+    translation=None, 
+    data=None, 
+    send_async=False
+):
     """
     Method for sending email in this pluggable. Use this method to send your email, specifying
     the name of a MailModel and the language of the email (optionally).
@@ -60,7 +68,7 @@ def send_email(recipients, sender, mail_model_name, translation=None, data=None,
     Template = kajiki.TextTemplate(tr.subject)
     subject = Template(data).render()
 
-    _send_email(sender, recipients, subject, html, send_async)
+    _send_email(sender, recipients, subject, html, cc=cc, send_async=send_async)
 
 
 def _get_request():
@@ -71,18 +79,23 @@ def _get_request():
     """
     return tg.request
 
-def _send_email(sender, recipients, subject, html, send_async=True):
+def _send_email(sender, recipients, subject, html, cc=None, send_async=True):
     if not isinstance(recipients, list):
         recipients = list(recipients)
 
     if send_async and config['_mailtemplates']['async_sender'] == 'tgext.celery':
         from mailtemplates.lib.celery_tasks import mailtemplates_async_send_email
-        mailtemplates_async_send_email.delay(subject=subject, sender=sender,
-                                             recipients=recipients, html=html)
+        mailtemplates_async_send_email.delay(
+            subject=subject, sender=sender,
+            recipients=recipients, html=html, cc=cc
+        )
     elif send_async and config['_mailtemplates']['async_sender'] == 'tgext.asyncjob':
         from tgext.asyncjob import asyncjob_perform
         mailer = get_mailer(None)
-        message = Message(subject=subject, sender=sender, recipients=recipients, html=html)
+        message = Message(
+            subject=subject, sender=sender, recipients=recipients, 
+            html=html, cc=cc
+        )
         asyncjob_perform(mailer.send_immediately, message=message)
     else:
         try:
@@ -91,7 +104,10 @@ def _send_email(sender, recipients, subject, html, send_async=True):
         except AttributeError:
             log.debug('using global mailer in not-async context')
             mailer = get_mailer(None)
-        message = Message(subject=subject, sender=sender, recipients=recipients, html=html)
+        message = Message(
+            subject=subject, sender=sender, recipients=recipients, 
+            html=html, cc=cc
+        )
         mailer.send_immediately(message)
 
 
