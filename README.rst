@@ -1,7 +1,6 @@
 .. image:: https://travis-ci.org/axant/tgapp-mailtemplates.svg?branch=master
    :target: https://travis-ci.org/axant/tgapp-mailtemplates
 
-
 About mailtemplates
 -------------------------
 
@@ -83,7 +82,7 @@ details of params of ``send_email``
 - send_async: The email will sent asynchronously if this flag is True
 
 Note on send_async
--------------
+--------------------
 
 if you are already in an asyncronous context then you can't use tgext.asyncjob with send_async=True,
 but you're already in an asyncronous context, so you can just use send_async=False.
