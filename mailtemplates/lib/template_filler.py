@@ -23,6 +23,9 @@ class TemplateFiller(object):
 
     def __repr__(self):
         return self.name
+    
+    def __next__(self):
+        return self.next()
 
     def next(self):
         if self.rounds >= 2:
