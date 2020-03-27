@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from formencode.validators import UnicodeString
 from mailtemplates.lib.validator import KajikiTemplateValidator, KajikiTextTemplateValidator, UniqueLanguageValidator, \
     UniqueModelNameValidator
