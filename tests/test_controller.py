@@ -322,7 +322,7 @@ class MailTemplatesControllerTests(object):
             )
 
     # TODO: test tgext.celery integration:
-
+    # TODO: properly test attachments
 
 class TestMailTemplatesControllerSQLA(MailTemplatesControllerTests):
     @classmethod
