@@ -25,7 +25,8 @@ def send_email(
     translation=None, 
     data=None, 
     send_async=False,
-    attachments=None,    
+    attachments=None,
+    bcc=None    
 ):
     """
     Method for sending email in this pluggable. Use this method to send your email, specifying
@@ -72,7 +73,7 @@ def send_email(
     if attachments is None:
         attachments = []
     
-    _send_email(sender, recipients, subject, html, cc=cc, send_async=send_async, attachments=attachments)
+    _send_email(sender, recipients, subject, html, cc=cc, bcc=bcc, send_async=send_async, attachments=attachments)
 
 
 def _get_request():
@@ -83,11 +84,11 @@ def _get_request():
     """
     return tg.request
 
-def _send_email(sender, recipients, subject, html, cc=None, send_async=True, attachments=None):
+def _send_email(sender, recipients, subject, html, cc=None, bcc= None, send_async=True, attachments=None):
     if not isinstance(recipients, list):
         recipients = list(recipients)
     
-    message = Message(subject=subject, sender=sender, recipients=recipients, html=html, cc=cc)
+    message = Message(subject=subject, sender=sender, recipients=recipients, html=html, cc=cc, bcc=bcc)
 
     if attachments is None:  # useless if sending through send_email
         attachments = []
